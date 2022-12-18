@@ -12,6 +12,9 @@ import { createUserSchema } from "./schema/user.schema";
 
 function routes(app: Express) {
   app.get("/healtcheck", (req: Request, res: Response) => res.sendStatus(200));
+
+  app.post("/api/users", validateResource(createUserSchema), createUserHandler);
+
 }
 
 export default routes;
