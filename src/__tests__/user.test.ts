@@ -9,6 +9,7 @@ import { signJwt } from "../utils/jwt.utils";
 const app = createServer();
 
 const userId = new mongoose.Types.ObjectId().toString();
+const sessionId = new mongoose.Types.ObjectId().toString();
 
 const userPayload = {
   _id: userId,
@@ -21,6 +22,17 @@ const userInput = {
   name: "John Smith",
   password: "Password123",
   passwordConfirmation: "Password123",
+};
+
+const sessionPayload = {
+  _id: new mongoose.Types.ObjectId().toString(),
+  user: userId,
+  valid: true,
+  userAgent: "PostmanRuntime/7.28.4",
+  session: sessionId,
+  createdAt: new Date("2021-09-30T13:31:07.674Z"),
+  updatedAt: new Date("2021-09-30T13:31:07.674Z"),
+  __v: 0,
 };
 
 describe("user", () => {
@@ -74,6 +86,45 @@ describe("user", () => {
         expect(statusCode).toBe(409);
 
         expect(createUserServiceMock).toHaveBeenCalled();
+      });
+    });
+  });
+
+  describe("create user session", () => {
+    describe("given the username and password are valid", () => {
+      it("should return a signed accessToken & refresh token", async () => {
+        jest
+          .spyOn(UserService, "validatePassword")
+          // @ts-ignore
+          .mockReturnValue(userPayload);
+
+        jest
+          .spyOn(SessionService, "createSession")
+          // @ts-ignore
+          .mockReturnValue(sessionPayload);
+
+        const req = {
+          get: () => {
+            return "a user agent";
+          },
+          body: {
+            email: "test@example.com",
+            password: "Password123",
+          },
+        };
+
+        const send = jest.fn();
+        const res = {
+          send,
+        };
+
+        // @ts-ignore
+        await createUserSessionHandler(req, res);
+
+        expect(send).toHaveBeenCalledWith({
+          accessToken: expect.any(String),
+          refreshToken: expect.any(String),
+        });
       });
     });
   });

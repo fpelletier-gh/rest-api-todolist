@@ -15,6 +15,13 @@ function routes(app: Express) {
 
   app.post("/api/users", validateResource(createUserSchema), createUserHandler);
 
+  app.post(
+    "/api/sessions",
+    validateResource(createSessionSchema),
+    createUserSessionHandler
+  );
+
+  app.get("/api/sessions", requireUser, getUserSessionHandler);
 }
 
 export default routes;
