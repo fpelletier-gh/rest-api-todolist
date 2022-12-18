@@ -22,6 +22,7 @@ function routes(app: Express) {
   );
 
   app.get("/api/sessions", requireUser, getUserSessionHandler);
+  app.delete("/api/sessions", requireUser, deleteUserSessionHandler);
 }
 
 export default routes;

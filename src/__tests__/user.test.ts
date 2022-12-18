@@ -35,6 +35,8 @@ const sessionPayload = {
   __v: 0,
 };
 
+const deleteSessionPayload = { accessToken: null, refreshToken: null };
+
 describe("user", () => {
   describe("user registration", () => {
     describe("given the username and password are valid", () => {
@@ -125,6 +127,30 @@ describe("user", () => {
           accessToken: expect.any(String),
           refreshToken: expect.any(String),
         });
+      });
+    });
+  });
+
+  describe("delete user session", () => {
+    describe("given the session is valid", () => {
+      it("should return accessToken and refreshToken null", async () => {
+        const updateSessionMock = jest
+          .spyOn(SessionService, "updateSession")
+          // @ts-ignore
+          .mockReturnValue(deleteSessionPayload);
+
+        const jwt = signJwt(userPayload);
+
+        const { statusCode, body } = await request(app)
+          .delete("/api/sessions")
+          .set("Authorization", `Bearer ${jwt}`)
+          .send(sessionPayload);
+
+        expect(updateSessionMock).toHaveBeenCalled();
+
+        expect(body).toEqual(deleteSessionPayload);
+
+        expect(statusCode).toBe(200);
       });
     });
   });
