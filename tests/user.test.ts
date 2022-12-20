@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 import request from "supertest";
-import createServer from "../utils/server";
-import * as UserService from "../service/user.service";
-import * as SessionService from "../service/session.service";
-import { createUserSessionHandler } from "../controller/session.controller";
-import { signJwt } from "../utils/jwt.utils";
+import createServer from "../src/utils/server";
+import * as UserService from "../src/service/user.service";
+import * as SessionService from "../src/service/session.service";
+import { createUserSessionHandler } from "../src/controller/session.controller";
+import { signJwt } from "../src/utils/jwt.utils";
 
 const app = createServer();
 
