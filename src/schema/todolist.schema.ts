@@ -30,9 +30,14 @@ export const createTodolistSchema = object({
   ...payload,
 });
 
+export const deleteTodolistSchema = object({
+  ...params,
+});
+
 export const getTodolistSchema = object({
   ...params,
 });
 
 export type CreateTodolistInput = TypeOf<typeof createTodolistSchema>;
 export type GetTodolistInput = TypeOf<typeof getTodolistSchema>;
+export type DeleteTodolistInput = TypeOf<typeof deleteTodolistSchema>;

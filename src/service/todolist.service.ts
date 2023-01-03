@@ -14,3 +14,7 @@ export async function createTodolist(
 export async function findTodolist(query: FilterQuery<TodolistDocument>) {
   return TodolistModel.findOne(query).lean();
 }
+
+export function deleteTodolist(query: FilterQuery<TodolistDocument>) {
+  return TodolistModel.deleteOne(query);
+}
