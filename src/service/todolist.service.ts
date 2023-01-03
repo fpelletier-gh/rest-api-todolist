@@ -1,9 +1,17 @@
-import { DocumentDefinition, FilterQuery, UpdateQuery } from "mongoose";
-import TodolistModel, { TodolistDocument } from "../models/todolist.model";
+import {
+  DocumentDefinition,
+  FilterQuery,
+  QueryOptions,
+  UpdateQuery,
+} from "mongoose";
+import TodolistModel, {
+  TodoDocument,
+  TodolistDocument,
+} from "../models/todolist.model";
 
 export async function createTodolist(
   input: DocumentDefinition<
-    Omit<TodolistDocument, "createdAt" | "updatedAt" | "todolistId">
+    Omit<TodolistDocument, "createdAt" | "updatedAt" | "todolistId" | "todos">
   >
 ) {
   const todoList = await TodolistModel.create(input);
@@ -15,6 +23,14 @@ export async function findTodolist(query: FilterQuery<TodolistDocument>) {
   return TodolistModel.findOne(query).lean();
 }
 
-export function deleteTodolist(query: FilterQuery<TodolistDocument>) {
+export async function findAndUpdateTodolist(
+  query: FilterQuery<TodolistDocument>,
+  update: UpdateQuery<TodolistDocument>,
+  options: QueryOptions
+) {
+  return TodolistModel.findOneAndUpdate(query, update, options);
+}
+
+export async function deleteTodolist(query: FilterQuery<TodolistDocument>) {
   return TodolistModel.deleteOne(query);
 }

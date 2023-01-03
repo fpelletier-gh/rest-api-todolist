@@ -8,6 +8,7 @@ import {
   createTodolistHandler,
   deleteTodolistHandler,
   getTodolistHandler,
+  updateTodolistHandler,
 } from "./controller/todolist.controller";
 import { createUserHandler } from "./controller/user.controller";
 import requireUser from "./middleware/requireUser";
@@ -17,6 +18,7 @@ import {
   createTodolistSchema,
   deleteTodolistSchema,
   getTodolistSchema,
+  updateTodolistSchema,
 } from "./schema/todolist.schema";
 import { createUserSchema } from "./schema/user.schema";
 
@@ -38,6 +40,12 @@ function routes(app: Express) {
     "/api/todolist",
     [requireUser, validateResource(createTodolistSchema)],
     createTodolistHandler
+  );
+
+  app.put(
+    "/api/todolist/:todolistId",
+    [requireUser, validateResource(updateTodolistSchema)],
+    updateTodolistHandler
   );
 
   app.get(

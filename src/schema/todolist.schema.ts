@@ -6,14 +6,6 @@ const payload = {
       required_error: "Title is required",
     }),
     description: string(),
-    /* todos: array( */
-    /*   object({ */
-    /*     title: string(), */
-    /*     complete: boolean(), */
-    /*     createdAt: date(), */
-    /*     updatedAt: date(), */
-    /*   }) */
-    /* ), */
     valid: boolean(),
   }),
 };
@@ -30,6 +22,11 @@ export const createTodolistSchema = object({
   ...payload,
 });
 
+export const updateTodolistSchema = object({
+  ...payload,
+  ...params,
+});
+
 export const deleteTodolistSchema = object({
   ...params,
 });
@@ -39,5 +36,6 @@ export const getTodolistSchema = object({
 });
 
 export type CreateTodolistInput = TypeOf<typeof createTodolistSchema>;
+export type UpdateTodolistInput = TypeOf<typeof updateTodolistSchema>;
 export type GetTodolistInput = TypeOf<typeof getTodolistSchema>;
 export type DeleteTodolistInput = TypeOf<typeof deleteTodolistSchema>;
