@@ -18,8 +18,21 @@ const payload = {
   }),
 };
 
+const params = {
+  params: object({
+    todolistId: string({
+      required_error: "Id is required",
+    }),
+  }),
+};
+
 export const createTodolistSchema = object({
   ...payload,
 });
 
+export const getTodolistSchema = object({
+  ...params,
+});
+
 export type CreateTodolistInput = TypeOf<typeof createTodolistSchema>;
+export type GetTodolistInput = TypeOf<typeof getTodolistSchema>;

@@ -10,3 +10,7 @@ export async function createTodolist(
 
   return todoList.toJSON();
 }
+
+export async function findTodolist(query: FilterQuery<TodolistDocument>) {
+  return TodolistModel.findOne(query).lean();
+}

@@ -43,6 +43,52 @@ describe("todolist", () => {
     await mongoose.connection.close();
   });
 
+  describe("GET todolist route", () => {
+    describe("given the user is not logged in", () => {
+      it("should return a 403", async () => {
+        const invalidId = "1";
+
+        const { statusCode } = await supertest(app).get(
+          `/api/todolist/${invalidId}`
+        );
+        expect(statusCode).toBe(403);
+      });
+    });
+
+    describe("given the user is logged in and the todolist does not exist", () => {
+      it("should return a 404", async () => {
+        const jwt = signJwt(userPayload);
+
+        const invalidid = "1";
+
+        const { statusCode } = await supertest(app)
+          .get(`/api/todolist/${invalidid}`)
+          .set("Authorization", `Bearer ${jwt}`);
+
+        expect(statusCode).toBe(404);
+      });
+    });
+
+    describe("given the user is logged in and the todolist does exist", () => {
+      it("should return a 200 status and the todolist", async () => {
+        const jwt = signJwt(userPayload);
+
+        // @ts-ignore
+        const todolist = await createTodolist(todolistPayload);
+
+        const todolistId = todolist.todolistId;
+
+        const { statusCode, body } = await supertest(app)
+          .get(`/api/todolist/${todolistId}`)
+          .set("Authorization", `Bearer ${jwt}`);
+
+        expect(statusCode).toBe(200);
+
+        expect(body.todolistId).toBe(todolistId);
+      });
+    });
+  });
+
   describe("POST create todolist route", () => {
     describe("given the user is not logged in", () => {
       it("should return a 403", async () => {

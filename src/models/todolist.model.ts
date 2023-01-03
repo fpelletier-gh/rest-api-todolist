@@ -2,6 +2,13 @@ import mongoose from "mongoose";
 import { UserDocument } from "./user.model";
 import { v4 as uuidv4 } from "uuid";
 
+export interface TodoDocument extends mongoose.Document {
+  title: string;
+  complete: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export interface TodolistDocument extends mongoose.Document {
   user: UserDocument["_id"];
   todolistId: string;
@@ -12,6 +19,14 @@ export interface TodolistDocument extends mongoose.Document {
   createdAt: Date;
   updatedAt: Date;
 }
+
+const TodoSchema = new mongoose.Schema(
+  {
+    title: { type: String, required: true },
+    complete: { type: String, default: false },
+  },
+  { timestamps: true }
+);
 
 const TodolistSchema = new mongoose.Schema(
   {

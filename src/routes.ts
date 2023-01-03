@@ -6,6 +6,7 @@ import {
 } from "./controller/session.controller";
 import {
   createTodolistHandler,
+  getTodolistHandler,
 } from "./controller/todolist.controller";
 import { createUserHandler } from "./controller/user.controller";
 import requireUser from "./middleware/requireUser";
@@ -13,6 +14,7 @@ import validateResource from "./middleware/validateResource";
 import { createSessionSchema } from "./schema/session.schema";
 import {
   createTodolistSchema,
+  getTodolistSchema,
 } from "./schema/todolist.schema";
 import { createUserSchema } from "./schema/user.schema";
 
@@ -34,6 +36,12 @@ function routes(app: Express) {
     "/api/todolist",
     [requireUser, validateResource(createTodolistSchema)],
     createTodolistHandler
+  );
+
+  app.get(
+    "/api/todolist/:todolistId",
+    [requireUser, validateResource(getTodolistSchema)],
+    getTodolistHandler
   );
 }
 
