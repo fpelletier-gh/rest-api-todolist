@@ -34,3 +34,20 @@ export async function findAndUpdateTodolist(
 export async function deleteTodolist(query: FilterQuery<TodolistDocument>) {
   return TodolistModel.deleteOne(query);
 }
+
+export async function createTodos(
+  query: FilterQuery<TodolistDocument>,
+  input: DocumentDefinition<
+    Omit<TodoDocument, "createdAt" | "updatedAt" | "todoId" | "complete">
+  >
+) {
+  const todolist = await TodolistModel.findOne(query);
+
+  if (!todolist) throw new Error("Something went wrong");
+
+  todolist.todos.push(input);
+
+  await todolist.save();
+
+  return todolist.toJSON();
+}

@@ -10,6 +10,12 @@ const payload = {
   }),
 };
 
+const todoPayload = {
+  body: object({
+    title: string(),
+  }),
+};
+
 const params = {
   params: object({
     todolistId: string({
@@ -35,7 +41,13 @@ export const getTodolistSchema = object({
   ...params,
 });
 
+export const createTodoSchema = object({
+  ...params,
+  ...todoPayload,
+});
+
 export type CreateTodolistInput = TypeOf<typeof createTodolistSchema>;
 export type UpdateTodolistInput = TypeOf<typeof updateTodolistSchema>;
 export type GetTodolistInput = TypeOf<typeof getTodolistSchema>;
 export type DeleteTodolistInput = TypeOf<typeof deleteTodolistSchema>;
+export type CreateTodoInput = TypeOf<typeof createTodoSchema>;

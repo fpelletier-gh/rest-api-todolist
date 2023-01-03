@@ -3,7 +3,7 @@ import { MongoMemoryServer } from "mongodb-memory-server";
 import createServer from "../src/utils/server";
 import mongoose from "mongoose";
 import { signJwt } from "../src/utils/jwt.utils";
-import { createTodolist } from "../src/service/todolist.service";
+import { createTodolist, createTodos } from "../src/service/todolist.service";
 
 const app = createServer();
 
@@ -13,6 +13,7 @@ export const todolistPayload = {
   user: userId,
   title: "Groceries",
   description: "A list about groceries.",
+  todos: [],
   valid: true,
 };
 
@@ -22,6 +23,14 @@ export const todolistUpdatePayload = {
   description: "An updated list about groceries.",
   todos: [],
   valid: true,
+};
+
+export const todoPayload = {
+  title: "Buy milk",
+};
+
+export const secondTodoPayload = {
+  title: "Buy meat",
 };
 
 export const userPayload = {
@@ -126,6 +135,7 @@ describe("todolist", () => {
           todolistId: expect.any(String),
           title: "Groceries",
           description: "A list about groceries.",
+          todos: expect.any(Array),
           /* todos: [ */
           /*   { */
           /*     title: "Buy milk", */
@@ -276,6 +286,140 @@ describe("todolist", () => {
           /*     updatedAt: expect.any(String), */
           /*   }, */
           /* ], */
+          createdAt: expect.any(String),
+          updatedAt: expect.any(String),
+          valid: true,
+        });
+      });
+    });
+  });
+
+  describe("POST create a todo", () => {
+    describe("given the user is not logged in and the todolist does not exist", () => {
+      it("should return a 403", async () => {
+        const invalidId = "1";
+
+        const { statusCode } = await supertest(app)
+          .post(`/api/todolist/${invalidId}`)
+          .send(todoPayload);
+
+        expect(statusCode).toBe(403);
+      });
+    });
+
+    describe("given the user is not logged in and the todolist exist", () => {
+      it("should return a 403", async () => {
+        // @ts-ignore
+        const todolist = await createTodolist(todolistPayload);
+
+        const todolistId = todolist.todolistId;
+
+        const { statusCode } = await supertest(app)
+          .post(`/api/todolist/${todolistId}`)
+          .send(todoPayload);
+
+        expect(statusCode).toBe(403);
+      });
+    });
+
+    describe("given the user is logged in and the todolist does not exist", () => {
+      it("should return a 404", async () => {
+        const jwt = signJwt(userPayload);
+
+        const invalidid = "1";
+
+        const { statusCode } = await supertest(app)
+          .post(`/api/todolist/${invalidid}`)
+          .set("Authorization", `Bearer ${jwt}`)
+          .send(todoPayload);
+
+        expect(statusCode).toBe(404);
+      });
+    });
+
+    describe("given the user is logged in and the todolist does exist", () => {
+      it("should return a 200 status and the updated todolist", async () => {
+        const jwt = signJwt(userPayload);
+
+        // @ts-ignore
+        const todolist = await createTodolist(todolistPayload);
+
+        const todolistId = todolist.todolistId;
+
+        const { statusCode, body } = await supertest(app)
+          .post(`/api/todolist/${todolistId}`)
+          .set("Authorization", `Bearer ${jwt}`)
+          .send(todoPayload);
+
+        expect(statusCode).toBe(200);
+
+        expect(body).toEqual({
+          __v: 1,
+          _id: expect.any(String),
+          user: expect.any(String),
+          todolistId: expect.any(String),
+          title: "Groceries",
+          description: "A list about groceries.",
+          todos: [
+            {
+              _id: expect.any(String),
+              todoId: expect.any(String),
+              title: "Buy milk",
+              complete: false,
+              createdAt: expect.any(String),
+              updatedAt: expect.any(String),
+            },
+          ],
+          createdAt: expect.any(String),
+          updatedAt: expect.any(String),
+          valid: true,
+        });
+      });
+    });
+
+    describe("given the user is logged in and the todolist does exist with a todo", () => {
+      it("should be able to add a second todo", async () => {
+        const jwt = signJwt(userPayload);
+
+        // @ts-ignore
+        const todolist = await createTodolist(todolistPayload);
+
+        const todolistWithTodo = await createTodos(todolist, todoPayload);
+
+        const todolistId = todolistWithTodo.todolistId;
+
+        const { statusCode, body } = await supertest(app)
+          .post(`/api/todolist/${todolistId}`)
+          .set("Authorization", `Bearer ${jwt}`)
+          .send(secondTodoPayload);
+
+        expect(statusCode).toBe(200);
+
+        expect(body).toEqual({
+          __v: 2,
+          _id: expect.any(String),
+          user: expect.any(String),
+          todolistId: expect.any(String),
+          title: "Groceries",
+          description: "A list about groceries.",
+          todos: [
+            {
+              _id: expect.any(String),
+              todoId: expect.any(String),
+              title: "Buy milk",
+              complete: false,
+              createdAt: expect.any(String),
+              updatedAt: expect.any(String),
+            },
+            {
+              _id: expect.any(String),
+              todoId: expect.any(String),
+              title: "Buy meat",
+              complete: false,
+              createdAt: expect.any(String),
+              updatedAt: expect.any(String),
+            },
+          ],
           createdAt: expect.any(String),
           updatedAt: expect.any(String),
           valid: true,

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import {
+  CreateTodoInput,
   CreateTodolistInput,
   DeleteTodolistInput,
   GetTodolistInput,
@@ -7,6 +8,7 @@ import {
 } from "../schema/todolist.schema";
 import {
   createTodolist,
+  createTodos,
   deleteTodolist,
   findAndUpdateTodolist,
   findTodolist,
@@ -89,4 +91,34 @@ export async function updateTodolistHandler(
   );
 
   return res.send(updatedTodolist);
+}
+
+export async function createTodoHandler(
+  req: Request<CreateTodoInput["params"]>,
+  res: Response
+) {
+  const userId = res.locals.user._id;
+
+  const todolistId = req.params.todolistId;
+
+  const todolist = await findTodolist({ todolistId: todolistId });
+
+  if (!todolist) {
+    return res.sendStatus(404);
+  }
+
+  if (String(todolist.user) !== userId) {
+    return res.sendStatus(403);
+  }
+
+  const body = req.body;
+
+  const todolistUpdated = await createTodos(
+    { todolistId: todolistId },
+    {
+      ...body,
+    }
+  );
+
+  return res.send(todolistUpdated);
 }
