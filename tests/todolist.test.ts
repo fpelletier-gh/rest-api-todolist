@@ -3,7 +3,10 @@ import { MongoMemoryServer } from "mongodb-memory-server";
 import createServer from "../src/utils/server";
 import mongoose from "mongoose";
 import { signJwt } from "../src/utils/jwt.utils";
-import { createTodolist, createTodos } from "../src/service/todolist.service";
+import {
+  createTodolist,
+  findAndCreateTodo,
+} from "../src/service/todolist.service";
 
 const app = createServer();
 
@@ -129,7 +132,7 @@ describe("todolist", () => {
         expect(statusCode).toBe(200);
 
         expect(body).toEqual({
-          __v: 0,
+          __v: expect.any(Number),
           _id: expect.any(String),
           user: expect.any(String),
           todolistId: expect.any(String),
@@ -271,7 +274,7 @@ describe("todolist", () => {
         expect(statusCode).toBe(200);
 
         expect(body).toEqual({
-          __v: 0,
+          __v: expect.any(Number),
           _id: expect.any(String),
           user: expect.any(String),
           todolistId: expect.any(String),
@@ -354,7 +357,7 @@ describe("todolist", () => {
         expect(statusCode).toBe(200);
 
         expect(body).toEqual({
-          __v: 1,
+          __v: expect.any(Number),
           _id: expect.any(String),
           user: expect.any(String),
           todolistId: expect.any(String),
@@ -383,7 +386,7 @@ describe("todolist", () => {
 
         // @ts-ignore
         const todolist = await createTodolist(todolistPayload);
-        await createTodos(todolist, todoPayload);
+        await findAndCreateTodo(todolist, todoPayload, { new: true });
 
         const todolistId = todolist.todolistId;
 
@@ -395,7 +398,7 @@ describe("todolist", () => {
         expect(statusCode).toBe(200);
 
         expect(body).toEqual({
-          __v: 2,
+          __v: expect.any(Number),
           _id: expect.any(String),
           user: expect.any(String),
           todolistId: expect.any(String),

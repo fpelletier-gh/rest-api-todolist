@@ -35,19 +35,15 @@ export async function deleteTodolist(query: FilterQuery<TodolistDocument>) {
   return TodolistModel.deleteOne(query);
 }
 
-export async function createTodos(
+export async function findAndCreateTodo(
   query: FilterQuery<TodolistDocument>,
-  input: DocumentDefinition<
-    Omit<TodoDocument, "createdAt" | "updatedAt" | "todoId" | "complete">
-  >
+  update: UpdateQuery<TodolistDocument>,
+  options: QueryOptions
 ) {
-  const todolist = await TodolistModel.findOne(query);
-
-  if (!todolist) throw new Error("Something went wrong");
-
-  todolist.todos.push(input);
-
-  await todolist.save();
-
-  return todolist.toJSON();
+  const pushUpdate = {
+    $push: {
+      todos: update,
+    },
+  };
+  return TodolistModel.findOneAndUpdate(query, pushUpdate, options);
 }

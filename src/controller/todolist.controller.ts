@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import {
-  CreateTodoInput,
   CreateTodolistInput,
   DeleteTodolistInput,
   GetTodolistInput,
@@ -8,9 +7,9 @@ import {
 } from "../schema/todolist.schema";
 import {
   createTodolist,
-  createTodos,
   deleteTodolist,
   findAndUpdateTodolist,
+  findAndCreateTodo,
   findTodolist,
 } from "../service/todolist.service";
 
@@ -94,11 +93,42 @@ export async function updateTodolistHandler(
 }
 
 export async function createTodoHandler(
-  req: Request<CreateTodoInput["params"]>,
+  req: Request<UpdateTodolistInput["params"]>,
   res: Response
 ) {
   const userId = res.locals.user._id;
 
+  const todolistId = req.params.todolistId;
+  const update = req.body;
+
+  const todolist = await findTodolist({ todolistId: todolistId });
+
+  if (!todolist) {
+    return res.sendStatus(404);
+  }
+
+  if (String(todolist.user) !== userId) {
+    return res.sendStatus(403);
+  }
+
+  const updatedTodolist = await findAndCreateTodo(
+    { todolistId: todolistId },
+    update,
+    {
+      new: true,
+    }
+  );
+
+  console.log(updatedTodolist);
+
+  return res.send(updatedTodolist);
+}
+
+export async function deleteTodoHandler(
+  req: Request<DeleteTodolistInput["params"]>,
+  res: Response
+) {
+  const userId = res.locals.user._id;
   const todolistId = req.params.todolistId;
 
   const todolist = await findTodolist({ todolistId: todolistId });
@@ -111,14 +141,7 @@ export async function createTodoHandler(
     return res.sendStatus(403);
   }
 
-  const body = req.body;
+  await deleteTodolist({ todolistId: todolistId });
 
-  const todolistUpdated = await createTodos(
-    { todolistId: todolistId },
-    {
-      ...body,
-    }
-  );
-
-  return res.send(todolistUpdated);
+  return res.sendStatus(200);
 }
