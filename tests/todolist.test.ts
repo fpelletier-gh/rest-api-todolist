@@ -383,10 +383,9 @@ describe("todolist", () => {
 
         // @ts-ignore
         const todolist = await createTodolist(todolistPayload);
+        await createTodos(todolist, todoPayload);
 
-        const todolistWithTodo = await createTodos(todolist, todoPayload);
-
-        const todolistId = todolistWithTodo.todolistId;
+        const todolistId = todolist.todolistId;
 
         const { statusCode, body } = await supertest(app)
           .post(`/api/todolist/${todolistId}`)
