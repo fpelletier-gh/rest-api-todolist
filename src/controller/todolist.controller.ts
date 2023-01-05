@@ -55,16 +55,21 @@ export async function deleteTodolistHandler(
   const todolist = await findTodolist({ todolistId: todolistId });
 
   if (!todolist) {
-    return res.sendStatus(404);
+    return res.status(404).send("Todolist does not exist");
   }
 
   if (String(todolist.user) !== userId) {
-    return res.sendStatus(403);
+    return res.status(403).send("Unauthorized");
   }
 
-  await deleteTodolist({ todolistId: todolistId });
+  try {
+    await deleteTodolist({ todolistId: todolistId });
 
-  return res.sendStatus(200);
+    return res.sendStatus(200);
+  } catch (e: any) {
+    logger.error(e);
+    return res.status(409).send("Something went wrong, please try again");
+  }
 }
 
 export async function updateTodolistHandler(
