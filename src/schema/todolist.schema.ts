@@ -24,6 +24,17 @@ const params = {
   }),
 };
 
+const todoParam = {
+  params: object({
+    todolistId: string({
+      required_error: "Id is required",
+    }),
+    todoId: string({
+      required_error: "Id is required",
+    }),
+  }),
+};
+
 export const createTodolistSchema = object({
   ...payload,
 });
@@ -31,6 +42,10 @@ export const createTodolistSchema = object({
 export const updateTodolistSchema = object({
   ...payload,
   ...params,
+});
+
+export const deleteTodoSchema = object({
+  ...todoParam,
 });
 
 export const deleteTodolistSchema = object({
@@ -51,3 +66,4 @@ export type UpdateTodolistInput = TypeOf<typeof updateTodolistSchema>;
 export type GetTodolistInput = TypeOf<typeof getTodolistSchema>;
 export type DeleteTodolistInput = TypeOf<typeof deleteTodolistSchema>;
 export type CreateTodoInput = TypeOf<typeof createTodoSchema>;
+export type DeleteTodoInput = TypeOf<typeof deleteTodoSchema>;

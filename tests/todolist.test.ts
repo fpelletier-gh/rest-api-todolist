@@ -429,4 +429,144 @@ describe("todolist", () => {
       });
     });
   });
+
+  describe("DELETE a todo", () => {
+    describe("given the user is not logged in and the todolist does not exist", () => {
+      it("should return a 403", async () => {
+        const invalidId = "1";
+        const invalidTodoId = "1";
+
+        const { statusCode } = await supertest(app).delete(
+          `/api/todolist/${invalidId}/${invalidTodoId}`
+        );
+
+        expect(statusCode).toBe(403);
+      });
+    });
+
+    describe("given the user is not logged in and the todolist and todo exist", () => {
+      it("should return a 403", async () => {
+        // @ts-ignore
+        const todolist = await createTodolist(todolistPayload);
+        const todolistId = todolist.todolistId;
+
+        const todolistWithTodo = await findAndCreateTodo(
+          { todolistId: todolistId },
+          todoPayload,
+          { new: true }
+        );
+
+        const todoId = todolistWithTodo?.todos[0].todoId;
+
+        const { statusCode } = await supertest(app).delete(
+          `/api/todolist/${todolistId}/${todoId}`
+        );
+
+        expect(statusCode).toBe(403);
+      });
+    });
+
+    describe("given the user is logged in, the todolist exist and the todo doesn't exist", () => {
+      it("should return a 404", async () => {
+        const jwt = signJwt(userPayload);
+
+        const todolist = await createTodolist(todolistPayload);
+        const todolistId = todolist.todolistId;
+        const invalidTodoId = "1";
+
+        const { statusCode } = await supertest(app)
+          .delete(`/api/todolist/${todolistId}/${invalidTodoId}`)
+          .set("Authorization", `Bearer ${jwt}`);
+
+        expect(statusCode).toBe(404);
+      });
+    });
+
+    describe("given the user is logged in, the todolist and todo exist", () => {
+      it("should return a 200 status and the updated todolist", async () => {
+        const jwt = signJwt(userPayload);
+
+        // @ts-ignore
+        const todolist = await createTodolist(todolistPayload);
+        const todolistId = todolist.todolistId;
+
+        const todolistWithTodo = await findAndCreateTodo(
+          { todolistId: todolistId },
+          todoPayload,
+          { new: true }
+        );
+
+        const todoId = todolistWithTodo?.todos[0].todoId;
+
+        const { statusCode, body } = await supertest(app)
+          .delete(`/api/todolist/${todolistId}/${todoId}`)
+          .set("Authorization", `Bearer ${jwt}`);
+
+        expect(statusCode).toBe(200);
+
+        expect(body).toEqual({
+          __v: expect.any(Number),
+          _id: expect.any(String),
+          user: expect.any(String),
+          todolistId: expect.any(String),
+          title: "Groceries",
+          description: "A list about groceries.",
+          todos: [],
+          createdAt: expect.any(String),
+          updatedAt: expect.any(String),
+          valid: true,
+        });
+      });
+    });
+
+    describe("given the user is logged in and the todolist does exist with more than one todo", () => {
+      it("should be able to delete the second todo", async () => {
+        const jwt = signJwt(userPayload);
+
+        // @ts-ignore
+        const todolist = await createTodolist(todolistPayload);
+        const todolistId = todolist.todolistId;
+
+        await findAndCreateTodo({ todolistId: todolistId }, todoPayload, {
+          new: true,
+        });
+
+        const todolistWithTwoTodos = await findAndCreateTodo(
+          { todolistId: todolistId },
+          secondTodoPayload,
+          { new: true }
+        );
+
+        const secondTodoId = todolistWithTwoTodos?.todos[1].todoId;
+
+        const { statusCode, body } = await supertest(app)
+          .delete(`/api/todolist/${todolistId}/${secondTodoId}`)
+          .set("Authorization", `Bearer ${jwt}`);
+
+        expect(statusCode).toBe(200);
+
+        expect(body).toEqual({
+          __v: expect.any(Number),
+          _id: expect.any(String),
+          user: expect.any(String),
+          todolistId: expect.any(String),
+          title: "Groceries",
+          description: "A list about groceries.",
+          todos: [
+            {
+              _id: expect.any(String),
+              todoId: expect.any(String),
+              title: "Buy milk",
+              complete: false,
+              createdAt: expect.any(String),
+              updatedAt: expect.any(String),
+            },
+          ],
+          createdAt: expect.any(String),
+          updatedAt: expect.any(String),
+          valid: true,
+        });
+      });
+    });
+  });
 });

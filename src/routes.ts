@@ -7,6 +7,7 @@ import {
 import {
   createTodoHandler,
   createTodolistHandler,
+  deleteTodoHandler,
   deleteTodolistHandler,
   getTodolistHandler,
   updateTodolistHandler,
@@ -19,6 +20,7 @@ import {
   createTodolistSchema,
   createTodoSchema,
   deleteTodolistSchema,
+  deleteTodoSchema,
   getTodolistSchema,
   updateTodolistSchema,
 } from "./schema/todolist.schema";
@@ -66,6 +68,12 @@ function routes(app: Express) {
     "/api/todolist/:todolistId",
     [requireUser, validateResource(createTodoSchema)],
     createTodoHandler
+  );
+
+  app.delete(
+    "/api/todolist/:todolistId/:todoId",
+    [requireUser, validateResource(deleteTodoSchema)],
+    deleteTodoHandler
   );
 }
 

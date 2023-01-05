@@ -35,6 +35,19 @@ export async function deleteTodolist(query: FilterQuery<TodolistDocument>) {
   return TodolistModel.deleteOne(query);
 }
 
+export async function findAndDeleteTodo(
+  query: FilterQuery<TodolistDocument>,
+  todoId: UpdateQuery<TodolistDocument>,
+  options: QueryOptions
+) {
+  const update = {
+    $pull: {
+      todos: todoId,
+    },
+  };
+  return TodolistModel.findOneAndUpdate(query, update, options);
+}
+
 export async function findAndCreateTodo(
   query: FilterQuery<TodolistDocument>,
   update: UpdateQuery<TodolistDocument>,

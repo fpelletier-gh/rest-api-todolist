@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import {
   CreateTodolistInput,
+  DeleteTodoInput,
   DeleteTodolistInput,
   GetTodolistInput,
   UpdateTodolistInput,
@@ -11,6 +12,7 @@ import {
   findAndUpdateTodolist,
   findAndCreateTodo,
   findTodolist,
+  findAndDeleteTodo,
 } from "../service/todolist.service";
 
 export async function createTodolistHandler(
@@ -119,21 +121,25 @@ export async function createTodoHandler(
     }
   );
 
-  console.log(updatedTodolist);
-
   return res.send(updatedTodolist);
 }
 
 export async function deleteTodoHandler(
-  req: Request<DeleteTodolistInput["params"]>,
+  req: Request<DeleteTodoInput["params"]>,
   res: Response
 ) {
   const userId = res.locals.user._id;
   const todolistId = req.params.todolistId;
+  const todoId = req.params.todoId;
 
   const todolist = await findTodolist({ todolistId: todolistId });
+  const todo = todolist?.todos.find((todo) => todo.todoId === todoId);
 
   if (!todolist) {
+    return res.sendStatus(404);
+  }
+
+  if (!todo) {
     return res.sendStatus(404);
   }
 
@@ -141,7 +147,11 @@ export async function deleteTodoHandler(
     return res.sendStatus(403);
   }
 
-  await deleteTodolist({ todolistId: todolistId });
+  const updatedTodolist = await findAndDeleteTodo(
+    { todolistId: todolistId },
+    { todoId: todoId },
+    { new: true }
+  );
 
-  return res.sendStatus(200);
+  return res.send(updatedTodolist);
 }
