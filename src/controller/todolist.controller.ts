@@ -84,22 +84,27 @@ export async function updateTodolistHandler(
   const todolist = await findTodolist({ todolistId: todolistId });
 
   if (!todolist) {
-    return res.sendStatus(404);
+    return res.status(404).send("Todolist does not exist");
   }
 
   if (String(todolist.user) !== userId) {
-    return res.sendStatus(403);
+    return res.status(403).send("Unauthorized");
   }
 
-  const updatedTodolist = await findAndUpdateTodolist(
-    { todolistId: todolistId },
-    update,
-    {
-      new: true,
-    }
-  );
+  try {
+    const updatedTodolist = await findAndUpdateTodolist(
+      { todolistId: todolistId },
+      update,
+      {
+        new: true,
+      }
+    );
 
-  return res.send(updatedTodolist);
+    return res.send(updatedTodolist);
+  } catch (e: any) {
+    logger.error(e);
+    return res.status(409).send("Something went wrong, please try again");
+  }
 }
 
 export async function createTodoHandler(
