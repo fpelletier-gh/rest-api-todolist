@@ -191,15 +191,15 @@ export async function updateTodoHandler(
   const todo = todolist?.todos.find((todo) => todo.todoId === todoId);
 
   if (!todolist) {
-    return res.sendStatus(404);
+    return res.status(404).send("Todolist does not exist");
   }
 
   if (!todo) {
-    return res.sendStatus(404);
+    return res.status(404).send("Todo does not exist");
   }
 
   if (String(todolist.user) !== userId) {
-    return res.sendStatus(403);
+    return res.status(403).send("Unauthorized");
   }
 
   const filteredTodo = omit(todo, ["createdAt", "updatedAt", "_id", "todoId"]);
