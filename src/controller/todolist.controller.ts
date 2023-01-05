@@ -39,7 +39,7 @@ export async function getTodolistHandler(
   const todolist = await findTodolist({ todolistId });
 
   if (!todolist) {
-    return res.sendStatus(404);
+    return res.status(404).send("Todolist does not exist");
   }
 
   return res.send(todolist);
