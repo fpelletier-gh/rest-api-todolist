@@ -60,3 +60,17 @@ export async function findAndCreateTodo(
   };
   return TodolistModel.findOneAndUpdate(query, pushUpdate, options);
 }
+
+export async function findAndUpdateTodo(
+  query: FilterQuery<TodolistDocument>,
+  update: UpdateQuery<TodolistDocument>,
+  options: QueryOptions
+) {
+  const setUpdate = {
+    $set: {
+      "todos.$.title": update.title,
+      "todos.$.complete": update.complete,
+    },
+  };
+  return TodolistModel.findOneAndUpdate(query, setUpdate, options);
+}
