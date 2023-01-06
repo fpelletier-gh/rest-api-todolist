@@ -164,7 +164,7 @@ describe("todolist", () => {
     });
   });
 
-  describe("Delete todolist route", () => {
+  describe("DELETE todolist route", () => {
     describe("given the user is not logged in and the todolist does not exist", () => {
       it("should return a 403", async () => {
         const invalidId = "1";
