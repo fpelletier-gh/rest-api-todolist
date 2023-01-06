@@ -16,16 +16,12 @@ export const todolistPayload = {
   user: userId,
   title: "Groceries",
   description: "A list about groceries.",
-  todos: [],
-  valid: true,
 };
 
 export const todolistUpdatePayload = {
   user: userId,
   title: "Updated Groceries",
   description: "An updated list about groceries.",
-  todos: [],
-  valid: true,
 };
 
 export const todoPayload = {

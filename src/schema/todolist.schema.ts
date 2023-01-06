@@ -1,12 +1,10 @@
-import { boolean, date, object, string, TypeOf } from "zod";
+import { object, string, TypeOf } from "zod";
 const payload = {
   body: object({
-    user: string(),
     title: string({
       required_error: "Title is required",
     }),
     description: string(),
-    valid: boolean(),
   }),
 };
 

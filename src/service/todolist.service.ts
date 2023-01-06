@@ -11,7 +11,10 @@ import TodolistModel, {
 
 export async function createTodolist(
   input: DocumentDefinition<
-    Omit<TodolistDocument, "createdAt" | "updatedAt" | "todolistId" | "todos">
+    Omit<
+      TodolistDocument,
+      "createdAt" | "updatedAt" | "todolistId" | "todos" | "valid"
+    >
   >
 ) {
   const todoList = await TodolistModel.create(input);
