@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 import config from "config";
-import connect from "./utils/connect";
+import { connectToDb, disconnectFromDb } from "./utils/db";
 import logger from "./utils/logger";
 import routes from "./routes";
 import createServer from "./utils/server";
@@ -10,10 +10,31 @@ const port = config.get<number>("port");
 
 const app = createServer();
 
+const signals = ["SIGINT", "SIGTERM", "SIGHUP"] as const;
+
+async function gracefulShutdown({
+  signal,
+}: {
+  signal: typeof signals[number];
+}) {
+  logger.info(`Got signal ${signal}. Good bye`);
+  await disconnectFromDb();
+
+  process.exit(0);
+}
+
 app.listen(port, async () => {
   logger.info(`App is running at http://localhost:${port}`);
 
-  await connect();
+  await connectToDb();
 
   routes(app);
+
+  for (let i = 0; i < signals.length; i++) {
+    process.on(signals[i], () =>
+      gracefulShutdown({
+        signal: signals[i],
+      })
+    );
+  }
 });
