@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
-    "test": "jest --runInBand ./test"
+    "test": "jest --runInBand ./test",
+    "build": "tsc"
   },
   "author": "Francis Pelletier",
   "license": "ISC",
