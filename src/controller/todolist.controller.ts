@@ -148,7 +148,11 @@ export async function createTodoHandler(
       }
     );
 
-    return res.send(updatedTodolist);
+    if (updatedTodolist) {
+      const newTodoId = updatedTodolist.todos.length - 1;
+      const newTodo = updatedTodolist.todos[newTodoId];
+      return res.send(newTodo);
+    }
   } catch (e: any) {
     logger.error(e);
     return res.status(409).send("Something went wrong, please try again");

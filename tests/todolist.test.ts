@@ -6,6 +6,7 @@ import { signJwt } from "../src/utils/jwt.utils";
 import {
   createTodolist,
   findAndCreateTodo,
+  findTodolist,
 } from "../src/service/todolist.service";
 
 const app = createServer();
@@ -438,7 +439,7 @@ describe("todolist", () => {
     });
 
     describe("given the user is logged in and the todolist does exist", () => {
-      it("should return a 200 status and the updated todolist", async () => {
+      it("should return a 200 status and the created todo", async () => {
         const jwt = signJwt(userPayload);
 
         // @ts-ignore
@@ -454,25 +455,12 @@ describe("todolist", () => {
         expect(statusCode).toBe(200);
 
         expect(body).toEqual({
-          __v: expect.any(Number),
           _id: expect.any(String),
-          user: expect.any(String),
-          todolistId: expect.any(String),
-          title: "Groceries",
-          description: "A list about groceries.",
-          todos: [
-            {
-              _id: expect.any(String),
-              todoId: expect.any(String),
-              title: "Buy milk",
-              complete: false,
-              createdAt: expect.any(String),
-              updatedAt: expect.any(String),
-            },
-          ],
+          todoId: expect.any(String),
+          title: "Buy milk",
+          complete: false,
           createdAt: expect.any(String),
           updatedAt: expect.any(String),
-          valid: true,
         });
       });
     });
@@ -495,34 +483,17 @@ describe("todolist", () => {
         expect(statusCode).toBe(200);
 
         expect(body).toEqual({
-          __v: expect.any(Number),
           _id: expect.any(String),
-          user: expect.any(String),
-          todolistId: expect.any(String),
-          title: "Groceries",
-          description: "A list about groceries.",
-          todos: [
-            {
-              _id: expect.any(String),
-              todoId: expect.any(String),
-              title: "Buy milk",
-              complete: false,
-              createdAt: expect.any(String),
-              updatedAt: expect.any(String),
-            },
-            {
-              _id: expect.any(String),
-              todoId: expect.any(String),
-              title: "Buy meat",
-              complete: false,
-              createdAt: expect.any(String),
-              updatedAt: expect.any(String),
-            },
-          ],
+          todoId: expect.any(String),
+          title: "Buy meat",
+          complete: false,
           createdAt: expect.any(String),
           updatedAt: expect.any(String),
-          valid: true,
         });
+
+        const newTodolist = await findTodolist({ todolistId });
+
+        expect(newTodolist?.todos.length).toBe(2);
       });
     });
   });
