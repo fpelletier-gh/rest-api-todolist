@@ -4,6 +4,7 @@ import {
   CreateTodolistInput,
   DeleteTodoInput,
   DeleteTodolistInput,
+  GetTodoInput,
   GetTodolistInput,
   UpdateTodolistInput,
 } from "../schema/todolist.schema";
@@ -157,6 +158,32 @@ export async function createTodoHandler(
     logger.error(e);
     return res.status(409).send("Something went wrong, please try again");
   }
+}
+
+export async function getTodoHandler(
+  req: Request<GetTodoInput["params"]>,
+  res: Response
+) {
+  const userId = res.locals.user._id;
+  const todolistId = req.params.todolistId;
+  const todoId = req.params.todoId;
+
+  const todolist = await findTodolist({ todolistId: todolistId });
+  const todo = todolist?.todos.find((todo) => todo.todoId === todoId);
+
+  if (!todolist) {
+    return res.status(404).send("Todolist does not exist");
+  }
+
+  if (!todo) {
+    return res.status(404).send("Todo does not exist");
+  }
+
+  if (String(todolist.user) !== userId) {
+    return res.status(403).send("Unauthorized");
+  }
+
+  return res.send(todo);
 }
 
 export async function deleteTodoHandler(

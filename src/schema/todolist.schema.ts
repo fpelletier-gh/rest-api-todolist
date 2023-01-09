@@ -46,6 +46,10 @@ export const deleteTodoSchema = object({
   ...todoParam,
 });
 
+export const getTodoSchema = object({
+  ...todoParam,
+});
+
 export const updateTodoSchema = object({
   ...todoParam,
 });
@@ -69,4 +73,5 @@ export type GetTodolistInput = TypeOf<typeof getTodolistSchema>;
 export type DeleteTodolistInput = TypeOf<typeof deleteTodolistSchema>;
 export type CreateTodoInput = TypeOf<typeof createTodoSchema>;
 export type DeleteTodoInput = TypeOf<typeof deleteTodoSchema>;
+export type GetTodoInput = TypeOf<typeof getTodoSchema>;
 export type UpdateTodoInput = TypeOf<typeof updateTodoSchema>;
