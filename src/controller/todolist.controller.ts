@@ -225,7 +225,11 @@ export async function updateTodoHandler(
       { new: true }
     );
 
-    return res.send(updatedTodolist);
+    const updatedTodo = updatedTodolist?.todos.find(
+      (todo) => todo.todoId === todoId
+    );
+
+    return res.send(updatedTodo);
   } catch (e: any) {
     logger.error(e);
     return res.status(409).send("Something went wrong, please try again");

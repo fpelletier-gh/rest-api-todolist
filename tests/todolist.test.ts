@@ -721,7 +721,7 @@ describe("todolist", () => {
     });
 
     describe("given the user is logged in, the todolist and todo exist", () => {
-      it("should return a 200 status and the updated todolist", async () => {
+      it("should return a 200 status and the updated todo", async () => {
         const jwt = signJwt(userPayload);
 
         // @ts-ignore
@@ -744,25 +744,12 @@ describe("todolist", () => {
         expect(statusCode).toBe(200);
 
         expect(body).toEqual({
-          __v: expect.any(Number),
+          title: "Buy milk",
+          complete: true,
           _id: expect.any(String),
-          user: expect.any(String),
-          todolistId: expect.any(String),
-          title: "Groceries",
-          description: "A list about groceries.",
-          todos: [
-            {
-              title: "Buy milk",
-              complete: true,
-              _id: expect.any(String),
-              createdAt: expect.any(String),
-              updatedAt: expect.any(String),
-              todoId: expect.any(String),
-            },
-          ],
           createdAt: expect.any(String),
           updatedAt: expect.any(String),
-          valid: true,
+          todoId: expect.any(String),
         });
       });
     });
@@ -795,33 +782,12 @@ describe("todolist", () => {
         expect(statusCode).toBe(200);
 
         expect(body).toEqual({
-          __v: expect.any(Number),
+          title: "Buy more meat",
+          complete: true,
           _id: expect.any(String),
-          user: expect.any(String),
-          todolistId: expect.any(String),
-          title: "Groceries",
-          description: "A list about groceries.",
-          todos: [
-            {
-              _id: expect.any(String),
-              todoId: expect.any(String),
-              title: "Buy milk",
-              complete: false,
-              createdAt: expect.any(String),
-              updatedAt: expect.any(String),
-            },
-            {
-              title: "Buy more meat",
-              complete: true,
-              _id: expect.any(String),
-              createdAt: expect.any(String),
-              updatedAt: expect.any(String),
-              todoId: expect.any(String),
-            },
-          ],
           createdAt: expect.any(String),
           updatedAt: expect.any(String),
-          valid: true,
+          todoId: expect.any(String),
         });
       });
     });
