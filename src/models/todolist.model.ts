@@ -27,6 +27,7 @@ const TodoSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
+      sparse: true,
       default: () => `todo_${uuidv4()}`,
     },
     title: { type: String, required: true },

@@ -15,6 +15,7 @@ import {
   findTodolist,
   findAndDeleteTodo,
   findAndUpdateTodo,
+  findAllTodolist,
 } from "../service/todolist.service";
 import logger from "../utils/logger";
 
@@ -29,6 +30,18 @@ export async function createTodolistHandler(
   const todolist = await createTodolist({ ...body, user: userId });
 
   return res.send(todolist);
+}
+
+export async function getAllTodolistHandler(req: Request, res: Response) {
+  const userId = res.locals.user._id;
+
+  if (!userId) {
+    return res.status(403).send("Unauthorized");
+  }
+
+  const todolists = await findAllTodolist({ user: userId });
+
+  return res.send(todolists);
 }
 
 export async function getTodolistHandler(

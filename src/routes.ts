@@ -9,6 +9,7 @@ import {
   createTodolistHandler,
   deleteTodoHandler,
   deleteTodolistHandler,
+  getAllTodolistHandler,
   getTodolistHandler,
   updateTodoHandler,
   updateTodolistHandler,
@@ -53,6 +54,8 @@ function routes(app: Express) {
     [requireUser, validateResource(updateTodolistSchema)],
     updateTodolistHandler
   );
+
+  app.get("/api/todolist", requireUser, getAllTodolistHandler);
 
   app.get(
     "/api/todolist/:todolistId",

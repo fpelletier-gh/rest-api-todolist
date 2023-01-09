@@ -22,6 +22,10 @@ export async function createTodolist(
   return todoList.toJSON();
 }
 
+export async function findAllTodolist(query: FilterQuery<TodolistDocument>) {
+  return TodolistModel.find(query).lean();
+}
+
 export async function findTodolist(query: FilterQuery<TodolistDocument>) {
   return TodolistModel.findOne(query).lean();
 }

@@ -18,6 +18,12 @@ export const todolistPayload = {
   description: "A list about groceries.",
 };
 
+export const secondTodolistPayload = {
+  user: userId,
+  title: "Task",
+  description: "A list about task.",
+};
+
 export const todolistUpdatePayload = {
   user: userId,
   title: "Updated Groceries",
@@ -66,6 +72,100 @@ describe("todolist", () => {
   afterAll(async () => {
     await mongoose.disconnect();
     await mongoose.connection.close();
+  });
+
+  describe("GET all todolist route", () => {
+    describe("given the user is not logged in", () => {
+      it("should return a 403", async () => {
+        const { statusCode } = await supertest(app).get(`/api/todolist`);
+        expect(statusCode).toBe(403);
+      });
+    });
+
+    describe("given the user is logged in and no todolist", () => {
+      it("should return a 200 status and an empty array", async () => {
+        const jwt = signJwt(userPayload);
+
+        const { statusCode, body } = await supertest(app)
+          .get(`/api/todolist`)
+          .set("Authorization", `Bearer ${jwt}`);
+
+        expect(statusCode).toBe(200);
+        expect(body).toEqual([]);
+      });
+    });
+
+    describe("given the user is logged in and one todolist exist", () => {
+      it("should return a 200 status and an array with the todolist", async () => {
+        const jwt = signJwt(userPayload);
+
+        // @ts-ignore
+        await createTodolist(todolistPayload);
+
+        const { statusCode, body } = await supertest(app)
+          .get(`/api/todolist`)
+          .set("Authorization", `Bearer ${jwt}`);
+
+        expect(statusCode).toBe(200);
+
+        expect(body[0]).toEqual({
+          __v: expect.any(Number),
+          _id: expect.any(String),
+          user: expect.any(String),
+          todolistId: expect.any(String),
+          title: "Groceries",
+          description: "A list about groceries.",
+          todos: expect.any(Array),
+          createdAt: expect.any(String),
+          updatedAt: expect.any(String),
+          valid: true,
+        });
+      });
+    });
+
+    describe("given the user is logged in and more than one todolist exist", () => {
+      it("should return a 200 status and an array with the todolists", async () => {
+        const jwt = signJwt(userPayload);
+
+        // @ts-ignore
+        await createTodolist(todolistPayload);
+        await createTodolist(secondTodolistPayload);
+
+        const { statusCode, body } = await supertest(app)
+          .get(`/api/todolist`)
+          .set("Authorization", `Bearer ${jwt}`);
+
+        expect(statusCode).toBe(200);
+
+        expect(body.length).toBe(2);
+
+        expect(body[0]).toEqual({
+          __v: expect.any(Number),
+          _id: expect.any(String),
+          user: expect.any(String),
+          todolistId: expect.any(String),
+          title: "Groceries",
+          description: "A list about groceries.",
+          todos: expect.any(Array),
+          createdAt: expect.any(String),
+          updatedAt: expect.any(String),
+          valid: true,
+        });
+
+        expect(body[1]).toEqual({
+          __v: expect.any(Number),
+          _id: expect.any(String),
+          user: expect.any(String),
+          todolistId: expect.any(String),
+          title: "Task",
+          description: "A list about task.",
+          todos: expect.any(Array),
+          createdAt: expect.any(String),
+          updatedAt: expect.any(String),
+          valid: true,
+        });
+      });
+    });
   });
 
   describe("GET todolist route", () => {
@@ -144,14 +244,6 @@ describe("todolist", () => {
           title: "Groceries",
           description: "A list about groceries.",
           todos: expect.any(Array),
-          /* todos: [ */
-          /*   { */
-          /*     title: "Buy milk", */
-          /*     complete: false, */
-          /*     createdAt: expect.any(String), */
-          /*     updatedAt: expect.any(String), */
-          /*   }, */
-          /* ], */
           createdAt: expect.any(String),
           updatedAt: expect.any(String),
           valid: true,
