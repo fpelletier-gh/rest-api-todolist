@@ -3,7 +3,7 @@ const payload = {
   body: object({
     title: string({
       required_error: "Title is required",
-    }),
+    }).min(1, "Title too short, should be 1 chars minimum"),
     description: string(),
   }),
 };
