@@ -1,4 +1,4 @@
-import { object, string, TypeOf } from "zod";
+import { boolean, object, string, TypeOf } from "zod";
 const payload = {
   body: object({
     title: string({
@@ -10,8 +10,11 @@ const payload = {
 
 const todoPayload = {
   body: object({
-    title: string(),
-  }),
+    title: string().min(1, "Title too short, should be 1 chars minimum"),
+    complete: boolean(),
+  })
+    .partial()
+    .refine((obj) => Object.values(obj).some((v) => v !== undefined)),
 };
 
 const params = {
