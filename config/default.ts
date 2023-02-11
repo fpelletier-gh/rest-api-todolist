@@ -1,5 +1,6 @@
 export default {
   port: process.env.PORT,
+  hostname: process.env.HOSTNAME,
   dbUri: process.env.DB_URI,
   saltWorkFactor: 10,
   accessTokenExpiration: "15m",

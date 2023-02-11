@@ -7,6 +7,7 @@ import routes from "./routes";
 import createServer from "./utils/server";
 
 const port = config.get<number>("port");
+const hostname = config.get<string>("hostname");
 
 const app = createServer();
 
@@ -23,7 +24,7 @@ async function gracefulShutdown({
   process.exit(0);
 }
 
-app.listen(port, async () => {
+app.listen(port, hostname, async () => {
   logger.info(`App is running at http://localhost:${port}`);
 
   await connectToDb();
