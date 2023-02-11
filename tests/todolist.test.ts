@@ -51,7 +51,7 @@ export const updatedSecondTodoPayload = {
 export const userPayload = {
   _id: userId,
   email: "test@example.com",
-  name: "John Smith",
+  username: "John Smith",
 };
 
 describe("todolist", () => {
