@@ -1,5 +1,3 @@
-import dotenv from "dotenv";
-dotenv.config();
 import config from "config";
 import { connectToDb, disconnectFromDb } from "./utils/db";
 import logger from "./utils/logger";
@@ -25,7 +23,7 @@ async function gracefulShutdown({
 }
 
 app.listen(port, hostname, async () => {
-  logger.info(`App is running at http://localhost:${port}`);
+  logger.info(`App is running at http://${hostname}:${port}`);
 
   await connectToDb();
 

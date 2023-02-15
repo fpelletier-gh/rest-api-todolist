@@ -4,7 +4,7 @@
   "description": "Todo list rest api with authentication",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
+    "dev": "ts-node-dev -r dotenv/config --respawn --transpile-only src/app.ts",
     "test": "jest --runInBand ./test",
     "build": "tsc"
   },
