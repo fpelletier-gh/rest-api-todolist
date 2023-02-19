@@ -42,7 +42,9 @@ export async function getAllTodolistHandler(req: Request, res: Response) {
 
   const todolists = await findAllTodolist({ user: userId });
 
-  return res.send(todolists.reverse());
+  return res.send(
+    todolists.sort((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime())
+  );
 }
 
 export async function getTodolistHandler(
