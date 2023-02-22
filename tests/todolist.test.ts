@@ -120,6 +120,7 @@ describe("todolist", () => {
           createdAt: expect.any(String),
           updatedAt: expect.any(String),
           valid: true,
+          favorite: false,
         });
       });
     });
@@ -145,12 +146,13 @@ describe("todolist", () => {
           _id: expect.any(String),
           user: expect.any(String),
           todolistId: expect.any(String),
-          title: "Groceries",
-          description: "A list about groceries.",
+          title: "Task",
+          description: "A list about task.",
           todos: expect.any(Array),
           createdAt: expect.any(String),
           updatedAt: expect.any(String),
           valid: true,
+          favorite: false,
         });
 
         expect(body[1]).toEqual({
@@ -158,12 +160,13 @@ describe("todolist", () => {
           _id: expect.any(String),
           user: expect.any(String),
           todolistId: expect.any(String),
-          title: "Task",
-          description: "A list about task.",
+          title: "Groceries",
+          description: "A list about groceries.",
           todos: expect.any(Array),
           createdAt: expect.any(String),
           updatedAt: expect.any(String),
           valid: true,
+          favorite: false,
         });
       });
     });
@@ -248,6 +251,7 @@ describe("todolist", () => {
           createdAt: expect.any(String),
           updatedAt: expect.any(String),
           valid: true,
+          favorite: false,
         });
       });
     });
@@ -390,6 +394,7 @@ describe("todolist", () => {
           createdAt: expect.any(String),
           updatedAt: expect.any(String),
           valid: true,
+          favorite: false,
         });
       });
     });
@@ -706,6 +711,7 @@ describe("todolist", () => {
           createdAt: expect.any(String),
           updatedAt: expect.any(String),
           valid: true,
+          favorite: false,
         });
       });
     });
@@ -756,6 +762,7 @@ describe("todolist", () => {
           createdAt: expect.any(String),
           updatedAt: expect.any(String),
           valid: true,
+          favorite: false,
         });
       });
     });

@@ -4,16 +4,13 @@ import {
   QueryOptions,
   UpdateQuery,
 } from "mongoose";
-import TodolistModel, {
-  TodoDocument,
-  TodolistDocument,
-} from "../models/todolist.model";
+import TodolistModel, { TodolistDocument } from "../models/todolist.model";
 
 export async function createTodolist(
   input: DocumentDefinition<
     Omit<
       TodolistDocument,
-      "createdAt" | "updatedAt" | "todolistId" | "todos" | "valid"
+      "createdAt" | "updatedAt" | "todolistId" | "todos" | "valid" | "favorite"
     >
   >
 ) {

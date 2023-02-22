@@ -17,6 +17,7 @@ export interface TodolistDocument extends mongoose.Document {
   description: string;
   todos: Types.DocumentArray<TodoDocument>;
   valid: boolean;
+  favorite: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -49,6 +50,7 @@ const TodolistSchema = new mongoose.Schema(
     description: { type: String },
     todos: [TodoSchema],
     valid: { type: Boolean, default: true },
+    favorite: { type: Boolean, default: false },
   },
   {
     timestamps: true,
