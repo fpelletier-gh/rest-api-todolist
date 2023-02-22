@@ -1,5 +1,12 @@
 import { Express, Request, Response } from "express";
 import {
+  createNoteHandler,
+  deleteNoteHandler,
+  getAllNoteHandler,
+  getNoteHandler,
+  updateNoteHandler,
+} from "./controller/note.controller";
+import {
   createUserSessionHandler,
   deleteUserSessionHandler,
   getUserSessionHandler,
@@ -21,6 +28,12 @@ import {
 } from "./controller/user.controller";
 import requireUser from "./middleware/requireUser";
 import validateResource from "./middleware/validateResource";
+import {
+  createNoteSchema,
+  deleteNoteSchema,
+  getNoteSchema,
+  updateNoteSchema,
+} from "./schema/note.schema";
 import { createSessionSchema } from "./schema/session.schema";
 import {
   createTodolistSchema,
@@ -98,6 +111,38 @@ function routes(app: Express) {
     "/api/todolist/:todolistId/:todoId",
     [requireUser, validateResource(updateTodoSchema)],
     updateTodoHandler
+  );
+
+  app.post(
+    "/api/note",
+    [requireUser, validateResource(createNoteSchema)],
+    createNoteHandler
+  );
+
+  app.put(
+    "/api/note/:noteId",
+    [requireUser, validateResource(updateNoteSchema)],
+    updateNoteHandler
+  );
+
+  app.get("/api/note", requireUser, getAllNoteHandler);
+
+  app.get(
+    "/api/note/:noteId",
+    [requireUser, validateResource(getNoteSchema)],
+    getNoteHandler
+  );
+
+  app.delete(
+    "/api/note/:noteId",
+    [requireUser, validateResource(deleteNoteSchema)],
+    deleteNoteHandler
+  );
+
+  app.post(
+    "/api/note/:noteId",
+    [requireUser, validateResource(createTodoSchema)],
+    createTodoHandler
   );
 }
 
