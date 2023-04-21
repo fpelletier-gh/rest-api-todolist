@@ -1,5 +1,6 @@
 import config from "config";
 import { Request, Response } from "express";
+import { omit } from "lodash";
 import {
   createSession,
   findSessions,
@@ -31,8 +32,10 @@ export async function createUserSessionHandler(req: Request, res: Response) {
     { expiresIn: config.get("refreshTokenExpiration") }
   );
 
+  const currentUser = omit(user, "__v");
+
   // return access and refresh tokens
-  return res.send({ accessToken, refreshToken });
+  return res.send({ accessToken, refreshToken, user: currentUser });
 }
 
 export async function getUserSessionHandler(req: Request, res: Response) {
