@@ -94,7 +94,7 @@ describe("user", () => {
 
   describe("create user session", () => {
     describe("given the username and password are valid", () => {
-      it("should return a signed accessToken & refresh token", async () => {
+      it("should return a signed accessToken, refresh token and user", async () => {
         jest
           .spyOn(UserService, "validatePassword")
           // @ts-ignore
@@ -126,6 +126,7 @@ describe("user", () => {
         expect(send).toHaveBeenCalledWith({
           accessToken: expect.any(String),
           refreshToken: expect.any(String),
+          user: expect.any(Object),
         });
       });
     });
