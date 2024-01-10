@@ -3,11 +3,15 @@ import { connectToDb, disconnectFromDb } from "./utils/db";
 import logger from "./utils/logger";
 import routes from "./routes";
 import createServer from "./utils/server";
+import swaggerUi from "swagger-ui-express";
+const swaggerDocument = require("../swagger-output.json");
 
 const port = config.get<number>("port");
 const hostname = config.get<string>("hostname");
 
 const app = createServer();
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 const signals = ["SIGINT", "SIGTERM", "SIGHUP"] as const;
 
