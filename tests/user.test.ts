@@ -5,6 +5,8 @@ import * as UserService from "../src/service/user.service";
 import * as SessionService from "../src/service/session.service";
 import { createUserSessionHandler } from "../src/controller/session.controller";
 import { signJwt } from "../src/utils/jwt.utils";
+import UserModel from "../src/models/user.model";
+import { deleteUser } from "../src/service/user.service";
 
 const app = createServer();
 
@@ -89,6 +91,20 @@ describe("user", () => {
 
         expect(createUserServiceMock).toHaveBeenCalled();
       });
+    });
+  });
+
+  describe("deleteUser", () => {
+    it("should delete a user", async () => {
+      const query = { _id: "user_id" };
+
+      const deleteOneMock = jest
+        .spyOn(UserModel, "deleteOne")
+        .mockResolvedValueOnce({ acknowledged: true, deletedCount: 1 });
+
+      await deleteUser(query);
+
+      expect(deleteOneMock).toHaveBeenCalledWith(query);
     });
   });
 
