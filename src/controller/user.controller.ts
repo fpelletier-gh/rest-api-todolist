@@ -21,6 +21,12 @@ export async function createUserHandler(
 }
 
 export async function getCurrentUserHandler(req: Request, res: Response) {
+  /* #swagger.security = [
+    { "apiKeyAccessToken": [] },
+    { "apiKeyRefreshToken": [] },
+    { "apiKeyAccessTokenCookie": [] },
+    { "apiKeyRefreshTokenCookie": [] }
+  ] */
   const user = omit(res.locals.user, ["password", "__v"]);
   return res.send(user);
 }

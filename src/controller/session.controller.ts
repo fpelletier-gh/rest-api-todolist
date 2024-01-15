@@ -39,6 +39,12 @@ export async function createUserSessionHandler(req: Request, res: Response) {
 }
 
 export async function getUserSessionHandler(req: Request, res: Response) {
+  /* #swagger.security = [
+    { "apiKeyAccessToken": [] },
+    { "apiKeyRefreshToken": [] },
+    { "apiKeyAccessTokenCookie": [] },
+    { "apiKeyRefreshTokenCookie": [] }
+  ] */
   const userId = res.locals.user._id;
 
   const sessions = await findSessions({ user: userId, valid: true });
@@ -47,6 +53,12 @@ export async function getUserSessionHandler(req: Request, res: Response) {
 }
 
 export async function deleteUserSessionHandler(req: Request, res: Response) {
+  /* #swagger.security = [
+    { "apiKeyAccessToken": [] },
+    { "apiKeyRefreshToken": [] },
+    { "apiKeyAccessTokenCookie": [] },
+    { "apiKeyRefreshTokenCookie": [] }
+  ] */
   const sessionId = res.locals.user.session;
 
   await updateSession({ _id: sessionId }, { valid: false });

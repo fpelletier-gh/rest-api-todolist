@@ -6,8 +6,32 @@ const doc = {
     description:
       "A REST API for todolists and notes using Node.js, Express, and MongoDB",
   },
-  host: "localhost:3000",
-  schemes: ["http"],
+  securityDefinitions: {
+    apiKeyAccessToken: {
+      type: "apiKey",
+      in: "header",
+      name: "x-access-token",
+      description: "Access token to authenticate requests",
+    },
+    apiKeyRefreshToken: {
+      type: "apiKey",
+      in: "header",
+      name: "x-refresh-token",
+      description: "Token to refresh access token",
+    },
+    apiKeyAccessTokenCookie: {
+      type: "apiKey",
+      in: "cookie",
+      name: "x-access-token",
+      description: "Access token to authenticate requests",
+    },
+    apiKeyRefreshTokenCookie: {
+      type: "apiKey",
+      in: "cookie",
+      name: "x-refresh-token",
+      description: "Token to refresh access token",
+    },
+    },
 };
 
 const outputFile = "./swagger-output.json";

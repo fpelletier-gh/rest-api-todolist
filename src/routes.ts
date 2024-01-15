@@ -70,82 +70,174 @@ function routes(app: Express) {
     "/api/todolist",
     [requireUser, validateResource(createTodolistSchema)],
     createTodolistHandler
+    /* #swagger.security = [
+      { "apiKeyAccessToken": [] },
+      { "apiKeyRefreshToken": [] },
+      { "apiKeyAccessTokenCookie": [] },
+      { "apiKeyRefreshTokenCookie": [] }
+    ] */
   );
 
   app.put(
     "/api/todolist/:todolistId",
     [requireUser, validateResource(updateTodolistSchema)],
     updateTodolistHandler
+    /* #swagger.security = [
+      { "apiKeyAccessToken": [] },
+      { "apiKeyRefreshToken": [] },
+      { "apiKeyAccessTokenCookie": [] },
+      { "apiKeyRefreshTokenCookie": [] }
+    ] */
   );
 
-  app.get("/api/todolist", requireUser, getAllTodolistHandler);
+  app.get("/api/todolist", requireUser, getAllTodolistHandler
+    /* #swagger.security = [
+      { "apiKeyAccessToken": [] },
+      { "apiKeyRefreshToken": [] },
+      { "apiKeyAccessTokenCookie": [] },
+      { "apiKeyRefreshTokenCookie": [] }
+    ] */
+  );
 
   app.get(
     "/api/todolist/:todolistId",
     [requireUser, validateResource(getTodolistSchema)],
     getTodolistHandler
+    /* #swagger.security = [
+      { "apiKeyAccessToken": [] },
+      { "apiKeyRefreshToken": [] },
+      { "apiKeyAccessTokenCookie": [] },
+      { "apiKeyRefreshTokenCookie": [] }
+    ] */
   );
 
   app.delete(
     "/api/todolist/:todolistId",
     [requireUser, validateResource(deleteTodolistSchema)],
     deleteTodolistHandler
+    /* #swagger.security = [
+      { "apiKeyAccessToken": [] },
+      { "apiKeyRefreshToken": [] },
+      { "apiKeyAccessTokenCookie": [] },
+      { "apiKeyRefreshTokenCookie": [] }
+    ] */
   );
 
   app.post(
     "/api/todolist/:todolistId",
     [requireUser, validateResource(createTodoSchema)],
     createTodoHandler
+    /* #swagger.security = [
+      { "apiKeyAccessToken": [] },
+      { "apiKeyRefreshToken": [] },
+      { "apiKeyAccessTokenCookie": [] },
+      { "apiKeyRefreshTokenCookie": [] }
+    ] */
   );
 
   app.get(
     "/api/todolist/:todolistId/:todoId",
     [requireUser, validateResource(getTodoSchema)],
     getTodoHandler
+    /* #swagger.security = [
+      { "apiKeyAccessToken": [] },
+      { "apiKeyRefreshToken": [] },
+      { "apiKeyAccessTokenCookie": [] },
+      { "apiKeyRefreshTokenCookie": [] }
+    ] */
   );
 
   app.delete(
     "/api/todolist/:todolistId/:todoId",
     [requireUser, validateResource(deleteTodoSchema)],
     deleteTodoHandler
+    /* #swagger.security = [
+      { "apiKeyAccessToken": [] },
+      { "apiKeyRefreshToken": [] },
+      { "apiKeyAccessTokenCookie": [] },
+      { "apiKeyRefreshTokenCookie": [] }
+    ] */
   );
 
   app.put(
     "/api/todolist/:todolistId/:todoId",
     [requireUser, validateResource(updateTodoSchema)],
     updateTodoHandler
+    /* #swagger.security = [
+      { "apiKeyAccessToken": [] },
+      { "apiKeyRefreshToken": [] },
+      { "apiKeyAccessTokenCookie": [] },
+      { "apiKeyRefreshTokenCookie": [] }
+    ] */
   );
 
   app.post(
     "/api/note",
     [requireUser, validateResource(createNoteSchema)],
     createNoteHandler
+    /* #swagger.security = [
+      { "apiKeyAccessToken": [] },
+      { "apiKeyRefreshToken": [] },
+      { "apiKeyAccessTokenCookie": [] },
+      { "apiKeyRefreshTokenCookie": [] }
+    ] */
   );
 
   app.put(
     "/api/note/:noteId",
     [requireUser, validateResource(updateNoteSchema)],
     updateNoteHandler
+    /* #swagger.security = [
+      { "apiKeyAccessToken": [] },
+      { "apiKeyRefreshToken": [] },
+      { "apiKeyAccessTokenCookie": [] },
+      { "apiKeyRefreshTokenCookie": [] }
+    ] */
   );
 
-  app.get("/api/note", requireUser, getAllNoteHandler);
+  app.get("/api/note", requireUser, getAllNoteHandler
+    /* #swagger.security = [
+      { "apiKeyAccessToken": [] },
+      { "apiKeyRefreshToken": [] },
+      { "apiKeyAccessTokenCookie": [] },
+      { "apiKeyRefreshTokenCookie": [] }
+    ] */
+  );
 
   app.get(
     "/api/note/:noteId",
     [requireUser, validateResource(getNoteSchema)],
     getNoteHandler
+    /* #swagger.security = [
+      { "apiKeyAccessToken": [] },
+      { "apiKeyRefreshToken": [] },
+      { "apiKeyAccessTokenCookie": [] },
+      { "apiKeyRefreshTokenCookie": [] }
+    ] */
   );
 
   app.delete(
     "/api/note/:noteId",
     [requireUser, validateResource(deleteNoteSchema)],
     deleteNoteHandler
+    /* #swagger.security = [
+      { "apiKeyAccessToken": [] },
+      { "apiKeyRefreshToken": [] },
+      { "apiKeyAccessTokenCookie": [] },
+      { "apiKeyRefreshTokenCookie": [] }
+    ] */
   );
 
   app.post(
     "/api/note/:noteId",
     [requireUser, validateResource(createTodoSchema)],
     createTodoHandler
+    /* #swagger.security = [
+      { "apiKeyAccessToken": [] },
+      { "apiKeyRefreshToken": [] },
+      { "apiKeyAccessTokenCookie": [] },
+      { "apiKeyRefreshTokenCookie": [] }
+    ] */
   );
 }
 
