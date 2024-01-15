@@ -24,7 +24,7 @@ import {
 } from "./controller/todolist.controller";
 import {
   createUserHandler,
-  getCurrentUser,
+  getCurrentUserHandler,
 } from "./controller/user.controller";
 import requireUser from "./middleware/requireUser";
 import validateResource from "./middleware/validateResource";
@@ -52,7 +52,7 @@ function routes(app: Express) {
 
   app.post("/api/users", validateResource(createUserSchema), createUserHandler);
 
-  app.get("/api/users", requireUser, getCurrentUser);
+  app.get("/api/users", requireUser, getCurrentUserHandler);
 
   app.post(
     "/api/sessions",

@@ -17,7 +17,7 @@ export async function createUserHandler(
   }
 }
 
-export async function getCurrentUser(req: Request, res: Response) {
+export async function getCurrentUserHandler(req: Request, res: Response) {
   const user = omit(res.locals.user, ["password", "__v"]);
   return res.send(user);
 }
