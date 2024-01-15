@@ -38,3 +38,7 @@ export async function findAndUpdateNote(
 export async function deleteNote(query: FilterQuery<NoteDocument>) {
   return NoteModel.deleteOne(query);
 }
+
+export async function deleteNotes(query: FilterQuery<NoteDocument>) {
+  return NoteModel.deleteMany(query);
+}

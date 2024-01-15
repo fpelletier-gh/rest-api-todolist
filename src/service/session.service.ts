@@ -22,6 +22,12 @@ export function updateSession(
   return SessionModel.updateOne(query, update);
 }
 
+export function deleteSessions(
+  query: FilterQuery<SessionDocument>,
+) {
+  return SessionModel.deleteMany(query);
+}
+
 export async function reIssueAccessToken({
   refreshToken,
 }: {

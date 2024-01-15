@@ -39,6 +39,10 @@ export async function deleteTodolist(query: FilterQuery<TodolistDocument>) {
   return TodolistModel.deleteOne(query);
 }
 
+export async function deleteTodolists(query: FilterQuery<TodolistDocument>) {
+  return TodolistModel.deleteMany(query);
+}
+
 export async function findAndDeleteTodo(
   query: FilterQuery<TodolistDocument>,
   todoId: UpdateQuery<TodolistDocument>,

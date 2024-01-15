@@ -3,6 +3,9 @@ import logger from "../utils/logger";
 import { createUser, deleteUser } from "../service/user.service";
 import { CreateUserInput } from "../schema/user.schema";
 import { omit } from "lodash";
+import { deleteSessions } from "../service/session.service";
+import { deleteTodolists } from "../service/todolist.service";
+import { deleteNotes } from "../service/note.service";
 
 export async function createUserHandler(
   req: Request<{}, {}, CreateUserInput["body"]>,
