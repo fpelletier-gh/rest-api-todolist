@@ -24,6 +24,7 @@ import {
 } from "./controller/todolist.controller";
 import {
   createUserHandler,
+  deleteCurrentUserHandler,
   getCurrentUserHandler,
 } from "./controller/user.controller";
 import requireUser from "./middleware/requireUser";
@@ -53,6 +54,8 @@ function routes(app: Express) {
   app.post("/api/users", validateResource(createUserSchema), createUserHandler);
 
   app.get("/api/users", requireUser, getCurrentUserHandler);
+
+  app.delete("/api/users", requireUser, deleteCurrentUserHandler);
 
   app.post(
     "/api/sessions",

@@ -2,6 +2,14 @@ import { get } from "lodash";
 import { NextFunction, Request, Response } from "express";
 import { verifyJwt } from "../utils/jwt.utils";
 import { reIssueAccessToken } from "../service/session.service";
+import { findUser } from "../service/user.service";
+import { UserDocument } from "../models/user.model";
+
+export async function verifyIfUserExistInDb(_id: UserDocument["_id"]) {
+  if (!_id) return false;
+  const user = await findUser({ _id });
+  return user ? true : false;
+}
 
 const deserialiseUser = async (
   req: Request,
@@ -21,7 +29,9 @@ const deserialiseUser = async (
 
   const { decoded, expired } = verifyJwt(accessToken);
 
-  if (decoded) {
+  const userIsInDb = await verifyIfUserExistInDb(get(decoded, "_id"));
+
+  if (decoded && userIsInDb) {
     res.locals.user = decoded;
     return next();
   }
