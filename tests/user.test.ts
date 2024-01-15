@@ -151,13 +151,18 @@ describe("user", () => {
   describe("delete user session", () => {
     describe("given the session is valid", () => {
       it("should return accessToken and refreshToken null", async () => {
+        jest.spyOn(UserService, "findUser").mockReturnValue(
+          // @ts-ignore
+          () => {
+            return userPayload;
+          }
+        );
         const updateSessionMock = jest
           .spyOn(SessionService, "updateSession")
           // @ts-ignore
           .mockReturnValue(deleteSessionPayload);
 
         const jwt = signJwt(userPayload);
-
         const { statusCode, body } = await request(app)
           .delete("/api/sessions")
           .set("Authorization", `Bearer ${jwt}`)

@@ -1,4 +1,5 @@
 import supertest from "supertest";
+import * as UserService from "../src/service/user.service";
 import { MongoMemoryServer } from "mongodb-memory-server";
 import createServer from "../src/utils/server";
 import mongoose from "mongoose";
@@ -7,7 +8,7 @@ import { createNote, findNote } from "../src/service/note.service";
 
 const app = createServer();
 
-const userId = new mongoose.Types.ObjectId().toString();
+const userId = "65a1a3ec38986bebd77298eb";
 
 export const notePayload = {
   user: userId,
@@ -47,6 +48,13 @@ describe("note", () => {
       const collection = collections[key];
       collection.deleteMany({});
     }
+
+    jest.spyOn(UserService, "findUser").mockReturnValue(
+      // @ts-ignore
+      () => {
+        return userPayload;
+      }
+    );
   });
 
   afterAll(async () => {
