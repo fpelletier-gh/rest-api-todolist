@@ -50,6 +50,10 @@ const doc = {
       updatedAt: "2023-02-01T01:19:21.502Z",
       __v: 0,
     },
+    DeleteSessionResponse: {
+      accessToken: null,
+      refreshToken: null,
+    },
   },
   securityDefinitions: {
     apiKeyAccessToken: {
@@ -76,7 +80,7 @@ const doc = {
       name: "x-refresh-token",
       description: "Token to refresh access token",
     },
-    },
+  },
 };
 
 const outputFile = "./swagger-output.json";

@@ -76,6 +76,12 @@ export async function deleteUserSessionHandler(req: Request, res: Response) {
     { "apiKeyAccessTokenCookie": [] },
     { "apiKeyRefreshTokenCookie": [] }
   ] */
+  // #swagger.summary = 'Delete current user session.'
+  // #swagger.description = 'Delete current user session.'
+  /* #swagger.responses[200] = {
+    description: 'successful operation',
+    schema: { $ref: '#/definitions/DeleteSessionResponse' }
+  } */
   const sessionId = res.locals.user.session;
 
   await updateSession({ _id: sessionId }, { valid: false });
