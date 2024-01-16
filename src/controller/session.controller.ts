@@ -10,6 +10,17 @@ import { validatePassword } from "../service/user.service";
 import { signJwt } from "../utils/jwt.utils";
 
 export async function createUserSessionHandler(req: Request, res: Response) {
+  // #swagger.summary = 'Create a new user session.'
+  // #swagger.description = 'Create a new user session.'
+  /*  #swagger.parameters['body'] = {
+      in: 'body',
+      description: 'Information needed to create a session.',
+      schema: { $ref: '#/definitions/CreateSession' }
+  } */
+  /* #swagger.responses[200] = {
+    description: 'successful operation',
+    schema: { $ref: '#/definitions/CreateSessionResponse' }
+  } */
   // Validate the user's password
   const user = await validatePassword(req.body);
 

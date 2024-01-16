@@ -24,6 +24,23 @@ const doc = {
       iat: 1705004647,
       exp: 1705005547,
     },
+    CreateSession: {
+      email: "test@example.com",
+      password: "Password456!",
+    },
+    CreateSessionResponse: {
+      accessToken:
+        "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2JkYzFiMDA5MWUxZWMxYzIwYjE4YzgiLCJlbWFpbCI6InRlc3RAZXhhbXBsZS5jb20iLCJ1c2VybmFtZSI6Int7dXNlcm5hbWV9fSIsImNyZWF0ZWRBdCI6IjIwMjMtMDEtMTBUMTk6NTE6MTMuMDAxWiIsInVwZGF0ZWRBdCI6IjIwMjMtMDEtMTBUMTk6NTE6MTMuMDAxWiIsIl9fdiI6MCwic2Vzc2lvbiI6IjY1YTA1MGU2ZWIxMWI1OWY3ODVhNjg4NSIsImlhdCI6MTcwNTAwNTI4NiwiZXhwIjoxNzA1MDA2MTg2fQ.PkCGC4NHk9L64j-Qs5Jp5XyIi4P6IO6_yfvYkN9lo4Nwi6hU4EYbqtrE3TmsmdB6TOMiEQj_5HzN2i5Cosszf1MU7muY86TQjzMyCvbqXJ-mVwCW6tl1SzLjZjgv9wyTywckYHc7kWppIhEUk3eJ0RINIe0scBYkveyJJ4-ammA",
+      refreshToken:
+        "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2JkYzFiMDA5MWUxZWMxYzIwYjE4YzgiLCJlbWFpbCI6InRlc3RAZXhhbXBsZS5jb20iLCJ1c2VybmFtZSI6Int7dXNlcm5hbWV9fSIsImNyZWF0ZWRBdCI6IjIwMjMtMDEtMTBUMTk6NTE6MTMuMDAxWiIsInVwZGF0ZWRBdCI6IjIwMjMtMDEtMTBUMTk6NTE6MTMuMDAxWiIsIl9fdiI6MCwic2Vzc2lvbiI6IjY1YTA1MGU2ZWIxMWI1OWY3ODVhNjg4NSIsImlhdCI6MTcwNTAwNTI4NiwiZXhwIjoxNzM2NTYyODg2fQ.I6qMkacyV4K5pgBBv4c3_ivCIR7_nAb3FaNCeI-MYY7qI9LbToD5EtsGrzdhWk63qxLWsaV8I1ofy5Nm8rvfBn7U7Ln5djTNCkhxgGeTi2oa-iprM7XWafi-hYp4Z5YtIRcTS5CqsgPovcGHcaroaNwtVGCmG62_VJAfmNWFTSs",
+      user: {
+        _id: "63bdc1b0091e1ec1c20b18c8",
+        email: "test@example.com",
+        username: "username",
+        createdAt: "2023-01-10T19:51:13.001Z",
+        updatedAt: "2023-01-10T19:51:13.001Z",
+      },
+    },
   },
   securityDefinitions: {
     apiKeyAccessToken: {
