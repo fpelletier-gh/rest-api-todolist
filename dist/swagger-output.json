@@ -1,0 +1,905 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "REST API Todolists",
+    "description": "A REST API for todolists and notes using Node.js, Express, and MongoDB",
+    "version": "1.0.0"
+  },
+  "host": "localhost:1337",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {
+    "apiKeyAccessToken": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "x-access-token",
+      "description": "Access token to authenticate requests"
+    },
+    "apiKeyRefreshToken": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "x-refresh-token",
+      "description": "Token to refresh access token"
+    },
+    "apiKeyAccessTokenCookie": {
+      "type": "apiKey",
+      "in": "cookie",
+      "name": "x-access-token",
+      "description": "Access token to authenticate requests"
+    },
+    "apiKeyRefreshTokenCookie": {
+      "type": "apiKey",
+      "in": "cookie",
+      "name": "x-refresh-token",
+      "description": "Token to refresh access token"
+    }
+  },
+  "paths": {
+    "/api/healtcheck": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/users": {
+      "post": {
+        "summary": "Create a new user.",
+        "description": "Create a new user.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Information about the user.",
+            "schema": {
+              "$ref": "#/definitions/CreateUser"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/GetUserResponse"
+            }
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get current user.",
+        "description": "Get current user.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/GetUserResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAccessToken": []
+          },
+          {
+            "apiKeyRefreshToken": []
+          },
+          {
+            "apiKeyAccessTokenCookie": []
+          },
+          {
+            "apiKeyRefreshTokenCookie": []
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete current user.",
+        "description": "Delete current user.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAccessToken": []
+          },
+          {
+            "apiKeyRefreshToken": []
+          },
+          {
+            "apiKeyAccessTokenCookie": []
+          },
+          {
+            "apiKeyRefreshTokenCookie": []
+          }
+        ]
+      }
+    },
+    "/api/sessions": {
+      "post": {
+        "summary": "Create a new user session.",
+        "description": "Create a new user session.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Information needed to create a session.",
+            "schema": {
+              "$ref": "#/definitions/CreateSession"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/CreateSessionResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get current user session.",
+        "description": "Get current user session.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/GetSessionResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAccessToken": []
+          },
+          {
+            "apiKeyRefreshToken": []
+          },
+          {
+            "apiKeyAccessTokenCookie": []
+          },
+          {
+            "apiKeyRefreshTokenCookie": []
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete current user session.",
+        "description": "Delete current user session.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/DeleteSessionResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAccessToken": []
+          },
+          {
+            "apiKeyRefreshToken": []
+          },
+          {
+            "apiKeyAccessTokenCookie": []
+          },
+          {
+            "apiKeyRefreshTokenCookie": []
+          }
+        ]
+      }
+    },
+    "/api/todolist": {
+      "post": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAccessToken": []
+          },
+          {
+            "apiKeyRefreshToken": []
+          },
+          {
+            "apiKeyAccessTokenCookie": []
+          },
+          {
+            "apiKeyRefreshTokenCookie": []
+          }
+        ]
+      },
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAccessToken": []
+          },
+          {
+            "apiKeyRefreshToken": []
+          },
+          {
+            "apiKeyAccessTokenCookie": []
+          },
+          {
+            "apiKeyRefreshTokenCookie": []
+          }
+        ]
+      }
+    },
+    "/api/todolist/{todolistId}": {
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "todolistId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAccessToken": []
+          },
+          {
+            "apiKeyRefreshToken": []
+          },
+          {
+            "apiKeyAccessTokenCookie": []
+          },
+          {
+            "apiKeyRefreshTokenCookie": []
+          }
+        ]
+      },
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "todolistId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAccessToken": []
+          },
+          {
+            "apiKeyRefreshToken": []
+          },
+          {
+            "apiKeyAccessTokenCookie": []
+          },
+          {
+            "apiKeyRefreshTokenCookie": []
+          }
+        ]
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "todolistId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAccessToken": []
+          },
+          {
+            "apiKeyRefreshToken": []
+          },
+          {
+            "apiKeyAccessTokenCookie": []
+          },
+          {
+            "apiKeyRefreshTokenCookie": []
+          }
+        ]
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "todolistId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAccessToken": []
+          },
+          {
+            "apiKeyRefreshToken": []
+          },
+          {
+            "apiKeyAccessTokenCookie": []
+          },
+          {
+            "apiKeyRefreshTokenCookie": []
+          }
+        ]
+      }
+    },
+    "/api/todolist/{todolistId}/{todoId}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "todolistId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "todoId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAccessToken": []
+          },
+          {
+            "apiKeyRefreshToken": []
+          },
+          {
+            "apiKeyAccessTokenCookie": []
+          },
+          {
+            "apiKeyRefreshTokenCookie": []
+          }
+        ]
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "todolistId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "todoId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAccessToken": []
+          },
+          {
+            "apiKeyRefreshToken": []
+          },
+          {
+            "apiKeyAccessTokenCookie": []
+          },
+          {
+            "apiKeyRefreshTokenCookie": []
+          }
+        ]
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "todolistId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "todoId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAccessToken": []
+          },
+          {
+            "apiKeyRefreshToken": []
+          },
+          {
+            "apiKeyAccessTokenCookie": []
+          },
+          {
+            "apiKeyRefreshTokenCookie": []
+          }
+        ]
+      }
+    },
+    "/api/note": {
+      "post": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAccessToken": []
+          },
+          {
+            "apiKeyRefreshToken": []
+          },
+          {
+            "apiKeyAccessTokenCookie": []
+          },
+          {
+            "apiKeyRefreshTokenCookie": []
+          }
+        ]
+      },
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAccessToken": []
+          },
+          {
+            "apiKeyRefreshToken": []
+          },
+          {
+            "apiKeyAccessTokenCookie": []
+          },
+          {
+            "apiKeyRefreshTokenCookie": []
+          }
+        ]
+      }
+    },
+    "/api/note/{noteId}": {
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "noteId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAccessToken": []
+          },
+          {
+            "apiKeyRefreshToken": []
+          },
+          {
+            "apiKeyAccessTokenCookie": []
+          },
+          {
+            "apiKeyRefreshTokenCookie": []
+          }
+        ]
+      },
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "noteId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAccessToken": []
+          },
+          {
+            "apiKeyRefreshToken": []
+          },
+          {
+            "apiKeyAccessTokenCookie": []
+          },
+          {
+            "apiKeyRefreshTokenCookie": []
+          }
+        ]
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "noteId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAccessToken": []
+          },
+          {
+            "apiKeyRefreshToken": []
+          },
+          {
+            "apiKeyAccessTokenCookie": []
+          },
+          {
+            "apiKeyRefreshTokenCookie": []
+          }
+        ]
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "noteId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        },
+        "security": [
+          {
+            "apiKeyAccessToken": []
+          },
+          {
+            "apiKeyRefreshToken": []
+          },
+          {
+            "apiKeyAccessTokenCookie": []
+          },
+          {
+            "apiKeyRefreshTokenCookie": []
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "CreateUser": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "test@example.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "Password456!"
+        },
+        "passwordConfirmation": {
+          "type": "string",
+          "example": "Password456!"
+        },
+        "username": {
+          "type": "string",
+          "example": "username"
+        }
+      }
+    },
+    "GetUserResponse": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "63bdc1b0091e1ec1c20b18c8"
+        },
+        "email": {
+          "type": "string",
+          "example": "test@example.com"
+        },
+        "username": {
+          "type": "string",
+          "example": "username"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "2023-01-10T19:51:13.001Z"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "2023-01-10T19:51:13.001Z"
+        },
+        "session": {
+          "type": "string",
+          "example": "63d9be19a1f2de672f615131"
+        },
+        "iat": {
+          "type": "number",
+          "example": 1705004647
+        },
+        "exp": {
+          "type": "number",
+          "example": 1705005547
+        }
+      }
+    },
+    "CreateSession": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "test@example.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "Password456!"
+        }
+      }
+    },
+    "CreateSessionResponse": {
+      "type": "object",
+      "properties": {
+        "accessToken": {
+          "type": "string",
+          "example": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2JkYzFiMDA5MWUxZWMxYzIwYjE4YzgiLCJlbWFpbCI6InRlc3RAZXhhbXBsZS5jb20iLCJ1c2VybmFtZSI6Int7dXNlcm5hbWV9fSIsImNyZWF0ZWRBdCI6IjIwMjMtMDEtMTBUMTk6NTE6MTMuMDAxWiIsInVwZGF0ZWRBdCI6IjIwMjMtMDEtMTBUMTk6NTE6MTMuMDAxWiIsIl9fdiI6MCwic2Vzc2lvbiI6IjY1YTA1MGU2ZWIxMWI1OWY3ODVhNjg4NSIsImlhdCI6MTcwNTAwNTI4NiwiZXhwIjoxNzA1MDA2MTg2fQ.PkCGC4NHk9L64j-Qs5Jp5XyIi4P6IO6_yfvYkN9lo4Nwi6hU4EYbqtrE3TmsmdB6TOMiEQj_5HzN2i5Cosszf1MU7muY86TQjzMyCvbqXJ-mVwCW6tl1SzLjZjgv9wyTywckYHc7kWppIhEUk3eJ0RINIe0scBYkveyJJ4-ammA"
+        },
+        "refreshToken": {
+          "type": "string",
+          "example": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2JkYzFiMDA5MWUxZWMxYzIwYjE4YzgiLCJlbWFpbCI6InRlc3RAZXhhbXBsZS5jb20iLCJ1c2VybmFtZSI6Int7dXNlcm5hbWV9fSIsImNyZWF0ZWRBdCI6IjIwMjMtMDEtMTBUMTk6NTE6MTMuMDAxWiIsInVwZGF0ZWRBdCI6IjIwMjMtMDEtMTBUMTk6NTE6MTMuMDAxWiIsIl9fdiI6MCwic2Vzc2lvbiI6IjY1YTA1MGU2ZWIxMWI1OWY3ODVhNjg4NSIsImlhdCI6MTcwNTAwNTI4NiwiZXhwIjoxNzM2NTYyODg2fQ.I6qMkacyV4K5pgBBv4c3_ivCIR7_nAb3FaNCeI-MYY7qI9LbToD5EtsGrzdhWk63qxLWsaV8I1ofy5Nm8rvfBn7U7Ln5djTNCkhxgGeTi2oa-iprM7XWafi-hYp4Z5YtIRcTS5CqsgPovcGHcaroaNwtVGCmG62_VJAfmNWFTSs"
+        },
+        "user": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "example": "63bdc1b0091e1ec1c20b18c8"
+            },
+            "email": {
+              "type": "string",
+              "example": "test@example.com"
+            },
+            "username": {
+              "type": "string",
+              "example": "username"
+            },
+            "createdAt": {
+              "type": "string",
+              "example": "2023-01-10T19:51:13.001Z"
+            },
+            "updatedAt": {
+              "type": "string",
+              "example": "2023-01-10T19:51:13.001Z"
+            }
+          }
+        }
+      }
+    },
+    "GetSessionResponse": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "63d9be19a1f2de672f615131"
+        },
+        "user": {
+          "type": "string",
+          "example": "63bdc1b0091e1ec1c20b18c8"
+        },
+        "valid": {
+          "type": "boolean",
+          "example": true
+        },
+        "userAgent": {
+          "type": "string",
+          "example": "PostmanRuntime/7.30.0"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "2023-02-01T01:19:21.502Z"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "2023-02-01T01:19:21.502Z"
+        },
+        "__v": {
+          "type": "number",
+          "example": 0
+        }
+      }
+    },
+    "DeleteSessionResponse": {
+      "type": "object",
+      "properties": {
+        "accessToken": {},
+        "refreshToken": {}
+      }
+    }
+  }
+}
