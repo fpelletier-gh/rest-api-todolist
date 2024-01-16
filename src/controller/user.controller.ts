@@ -11,6 +11,17 @@ export async function createUserHandler(
   req: Request<{}, {}, CreateUserInput["body"]>,
   res: Response
 ) {
+  // #swagger.summary = 'Create a new user.'
+  // #swagger.description = 'Create a new user.'
+  /*  #swagger.parameters['body'] = {
+    in: 'body',
+    description: 'Information about the user.',
+    schema: { $ref: '#/definitions/CreateUser' }
+  } */
+  /* #swagger.responses[200] = {
+    description: 'successful operation',
+    schema: { $ref: '#/definitions/GetUserResponse' }
+  } */
   try {
     const user = await createUser(req.body);
     return res.send(user);
