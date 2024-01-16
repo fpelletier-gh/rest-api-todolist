@@ -38,6 +38,12 @@ export async function getCurrentUserHandler(req: Request, res: Response) {
     { "apiKeyAccessTokenCookie": [] },
     { "apiKeyRefreshTokenCookie": [] }
   ] */
+  // #swagger.summary = 'Get current user.'
+  // #swagger.description = 'Get current user.'
+  /* #swagger.responses[200] = {
+    description: 'successful operation',
+    schema: { $ref: '#/definitions/GetUserResponse' }
+  } */
   const user = omit(res.locals.user, ["password", "__v"]);
   return res.send(user);
 }
