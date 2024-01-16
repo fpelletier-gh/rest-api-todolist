@@ -20,34 +20,9 @@ cp .dist.env .env
 
 4. Run `npm run start` to start the server
 
-## API Endpoints
+## Documentation
 
-### User
-
-- `GET /api/user` - get current user
-- `POST /api/user` - create a new user
-
-### Session
-
-- `GET /api/session` - get all sessions
-- `POST /api/session` - create a new session
-- `DELETE /api/session` - delete current session
-
-### Todolist
-
-- `GET /api/todolist` - get all todolists
-- `POST /api/todolist` - create a new todolist
-- `GET /api/todolist/:todolistId` - get a todolist by id
-- `PUT /api/todolist/:todolistId` - update a todolist by id
-- `DELETE /api/todolist/:todolistId` - delete a todolist by id
-
-### Notes
-
-- `GET /api/notes` - get all notes
-- `POST /api/notes` - create a new note
-- `GET /api/notes/:id` - get a note by id
-- `PUT /api/notes/:id` - update a note by id
-- `DELETE /api/notes/:id` - delete a note by id
+[Swagger Documentation](https://api-todolists.francispelletier.ca/api-docs/#/)
 
 ## Testing
 
