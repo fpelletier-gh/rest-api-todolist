@@ -48,15 +48,15 @@ export async function getCurrentUserHandler(req: Request, res: Response) {
   return res.send(user);
 }
 
-export async function deleteCurrentUserHandler( req: Request, res: Response) {
+export async function deleteCurrentUserHandler(req: Request, res: Response) {
   /* #swagger.security = [
     { "apiKeyAccessToken": [] },
     { "apiKeyRefreshToken": [] },
     { "apiKeyAccessTokenCookie": [] },
     { "apiKeyRefreshTokenCookie": [] }
   ] */
-    // #swagger.summary = 'Delete current user.'
-    // #swagger.summary = 'Delete current user.'
+  // #swagger.summary = 'Delete current user.'
+  // #swagger.description = 'Delete current user.'
   const userId = res.locals.user._id;
 
   try {
