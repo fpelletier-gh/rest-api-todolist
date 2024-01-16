@@ -41,6 +41,15 @@ const doc = {
         updatedAt: "2023-01-10T19:51:13.001Z",
       },
     },
+    GetSessionResponse: {
+      _id: "63d9be19a1f2de672f615131",
+      user: "63bdc1b0091e1ec1c20b18c8",
+      valid: true,
+      userAgent: "PostmanRuntime/7.30.0",
+      createdAt: "2023-02-01T01:19:21.502Z",
+      updatedAt: "2023-02-01T01:19:21.502Z",
+      __v: 0,
+    },
   },
   securityDefinitions: {
     apiKeyAccessToken: {

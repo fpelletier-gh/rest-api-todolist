@@ -56,6 +56,12 @@ export async function getUserSessionHandler(req: Request, res: Response) {
     { "apiKeyAccessTokenCookie": [] },
     { "apiKeyRefreshTokenCookie": [] }
   ] */
+  // #swagger.summary = 'Get current user session.'
+  // #swagger.description = 'Get current user session.'
+  /* #swagger.responses[200] = {
+    description: 'successful operation',
+    schema: { $ref: '#/definitions/GetSessionResponse' }
+  } */
   const userId = res.locals.user._id;
 
   const sessions = await findSessions({ user: userId, valid: true });
