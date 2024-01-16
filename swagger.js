@@ -83,7 +83,7 @@ const doc = {
   },
 };
 
-const outputFile = "./swagger-output.json";
+const outputFile = "./dist/swagger-output.json";
 const endpointsFiles = ["./dist/src/routes.js"];
 
 /* NOTE: if you use the express Router, you must pass in the 
