@@ -20,7 +20,7 @@ const signals = ["SIGINT", "SIGTERM", "SIGHUP"] as const;
 async function gracefulShutdown({
   signal,
 }: {
-  signal: typeof signals[number];
+  signal: (typeof signals)[number];
 }) {
   logger.info(`Got signal ${signal}. Good bye`);
   await disconnectFromDb();
