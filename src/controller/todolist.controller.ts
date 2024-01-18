@@ -24,6 +24,17 @@ export async function createTodolistHandler(
   req: Request<{}, {}, CreateTodolistInput["body"]>,
   res: Response
 ) {
+  // #swagger.summary = 'Create a new todolist.'
+  // #swagger.summary = 'Create a new todolist.'
+  /*  #swagger.parameters['body'] = {
+      in: 'body',
+      description: 'Information needed to create a session.',
+      schema: { $ref: '#/definitions/CreateTodolist' }
+  } */
+  /* #swagger.responses[200] = {
+    description: 'successful operation',
+    schema: { $ref: '#/definitions/CreateTodolistResponse' }
+  } */
   const userId = res.locals.user._id;
 
   const body = req.body;

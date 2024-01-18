@@ -54,6 +54,23 @@ const doc = {
       accessToken: null,
       refreshToken: null,
     },
+    CreateTodolist: {
+      title: "Groceries",
+      description: "A todo about groceries",
+    },
+    CreateTodolistResponse: {
+      user: "65a5d78c08419455e17c0139",
+      title: "Groceries",
+      description: "A todo about groceries",
+      valid: true,
+      favorite: false,
+      _id: "65a983201a1cb1de018a6af9",
+      todolistId: "todolist_0270f2d6-380c-490c-960b-d984e8b80bfd",
+      todos: [],
+      createdAt: "2024-01-18T19:59:28.038Z",
+      updatedAt: "2024-01-18T19:59:28.038Z",
+      __v: 0,
+    },
   },
   securityDefinitions: {
     apiKeyAccessToken: {
