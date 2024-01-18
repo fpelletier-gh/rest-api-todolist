@@ -71,6 +71,21 @@ const doc = {
       updatedAt: "2024-01-18T19:59:28.038Z",
       __v: 0,
     },
+    GetAllTodolistResponse: [
+      {
+        _id: "65a992d0eb15006c8581db4c",
+        user: "65a5d78c08419455e17c0139",
+        title: "Todolist",
+        description: "A Todolist about todolist",
+        valid: true,
+        favorite: false,
+        todolistId: "todolist_f18f6511-4e5e-40a0-965b-5e5ef9a8633b",
+        todos: [],
+        createdAt: "2024-01-18T21:06:24.901Z",
+        updatedAt: "2024-01-18T21:06:24.901Z",
+        __v: 0,
+      },
+    ],
   },
   securityDefinitions: {
     apiKeyAccessToken: {
