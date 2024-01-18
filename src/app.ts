@@ -1,3 +1,5 @@
+import * as dotenv from "dotenv";
+dotenv.config();
 import config from "config";
 import { connectToDb, disconnectFromDb } from "./utils/db";
 import logger from "./utils/logger";

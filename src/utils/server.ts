@@ -2,14 +2,16 @@ import express from "express";
 import routes from "../routes";
 import deserializeUser from "../middleware/deserialiseUser";
 import cors from "cors";
+import config from "config";
 
 function createServer() {
   const app = express();
+  const corsOrigin = config.get<string>("corsOrigin");
 
   app.use(
     cors({
       credentials: true,
-      origin: "http://localhost:5173",
+      origin: corsOrigin,
     })
   );
 

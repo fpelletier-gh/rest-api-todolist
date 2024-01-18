@@ -1,6 +1,7 @@
 export default {
   port: 1337,
   dbUri: "mongodb://localhost:27017/todolist-api",
+  corsOrigin: "http://127.0.0.1:1337",
   saltWorkFactor: 10,
   accessTokenExpiration: "15m",
   refreshTokenExpiration: "1y",
