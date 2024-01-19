@@ -11,7 +11,7 @@ function createServer() {
     const app = (0, express_1.default)();
     app.use((0, cors_1.default)({
         credentials: true,
-        origin: "http://127.0.0.1:5173",
+        origin: "http://localhost:5173",
     }));
     app.use(express_1.default.json());
     app.use(deserialiseUser_1.default);
