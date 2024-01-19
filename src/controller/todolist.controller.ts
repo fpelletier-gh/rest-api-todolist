@@ -68,6 +68,12 @@ export async function getTodolistHandler(
   req: Request<GetTodolistInput["params"]>,
   res: Response
 ) {
+  // #swagger.summary = 'Get a todolist.'
+  // #swagger.description = 'Get a todolist.'
+  /* #swagger.responses[200] = {
+    description: 'successful operation',
+    schema: { $ref: '#/definitions/CreateTodolistResponse' }
+  } */
   const todolistId = req.params.todolistId;
   const todolist = await findTodolist({ todolistId });
 
