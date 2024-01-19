@@ -18,6 +18,17 @@ const todolist_service_1 = require("../service/todolist.service");
 const logger_1 = __importDefault(require("../utils/logger"));
 function createTodolistHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        // #swagger.summary = 'Create a new todolist.'
+        // #swagger.summary = 'Create a new todolist.'
+        /*  #swagger.parameters['body'] = {
+            in: 'body',
+            description: 'Information needed to create a session.',
+            schema: { $ref: '#/definitions/CreateTodolist' }
+        } */
+        /* #swagger.responses[200] = {
+          description: 'successful operation',
+          schema: { $ref: '#/definitions/CreateTodolistResponse' }
+        } */
         const userId = res.locals.user._id;
         const body = req.body;
         const todolist = yield (0, todolist_service_1.createTodolist)(Object.assign(Object.assign({}, body), { user: userId }));
@@ -27,6 +38,12 @@ function createTodolistHandler(req, res) {
 exports.createTodolistHandler = createTodolistHandler;
 function getAllTodolistHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        // #swagger.summary = 'Get all todolists.'
+        // #swagger.summary = 'Get all todolists.'
+        /* #swagger.responses[200] = {
+          description: 'successful operation',
+          schema: { $ref: '#/definitions/GetAllTodolistResponse' }
+        } */
         const userId = res.locals.user._id;
         if (!userId) {
             return res.status(403).send("Unauthorized");

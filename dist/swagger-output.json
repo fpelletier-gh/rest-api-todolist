@@ -212,11 +212,24 @@
     },
     "/api/todolist": {
       "post": {
+        "summary": "Create a new todolist.",
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Information needed to create a session.",
+            "schema": {
+              "$ref": "#/definitions/CreateTodolist"
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/CreateTodolistResponse"
+            }
           }
         },
         "security": [
@@ -235,11 +248,15 @@
         ]
       },
       "get": {
+        "summary": "Get all todolists.",
         "description": "",
         "parameters": [],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/GetAllTodolistResponse"
+            }
           },
           "403": {
             "description": "Forbidden"
@@ -899,6 +916,122 @@
       "properties": {
         "accessToken": {},
         "refreshToken": {}
+      }
+    },
+    "CreateTodolist": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "Groceries"
+        },
+        "description": {
+          "type": "string",
+          "example": "A todo about groceries"
+        }
+      }
+    },
+    "CreateTodolistResponse": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "type": "string",
+          "example": "65a5d78c08419455e17c0139"
+        },
+        "title": {
+          "type": "string",
+          "example": "Groceries"
+        },
+        "description": {
+          "type": "string",
+          "example": "A todo about groceries"
+        },
+        "valid": {
+          "type": "boolean",
+          "example": true
+        },
+        "favorite": {
+          "type": "boolean",
+          "example": false
+        },
+        "_id": {
+          "type": "string",
+          "example": "65a983201a1cb1de018a6af9"
+        },
+        "todolistId": {
+          "type": "string",
+          "example": "todolist_0270f2d6-380c-490c-960b-d984e8b80bfd"
+        },
+        "todos": {
+          "type": "array",
+          "example": [],
+          "items": {}
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "2024-01-18T19:59:28.038Z"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "2024-01-18T19:59:28.038Z"
+        },
+        "__v": {
+          "type": "number",
+          "example": 0
+        }
+      }
+    },
+    "GetAllTodolistResponse": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "example": "65a992d0eb15006c8581db4c"
+          },
+          "user": {
+            "type": "string",
+            "example": "65a5d78c08419455e17c0139"
+          },
+          "title": {
+            "type": "string",
+            "example": "Todolist"
+          },
+          "description": {
+            "type": "string",
+            "example": "A Todolist about todolist"
+          },
+          "valid": {
+            "type": "boolean",
+            "example": true
+          },
+          "favorite": {
+            "type": "boolean",
+            "example": false
+          },
+          "todolistId": {
+            "type": "string",
+            "example": "todolist_f18f6511-4e5e-40a0-965b-5e5ef9a8633b"
+          },
+          "todos": {
+            "type": "array",
+            "example": [],
+            "items": {}
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2024-01-18T21:06:24.901Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "example": "2024-01-18T21:06:24.901Z"
+          },
+          "__v": {
+            "type": "number",
+            "example": 0
+          }
+        }
       }
     }
   }
