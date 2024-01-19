@@ -82,6 +82,8 @@ export async function deleteTodolistHandler(
   req: Request<DeleteTodolistInput["params"]>,
   res: Response
 ) {
+  // #swagger.summary = 'Delete a todolist.'
+  // #swagger.description = 'Delete a todolist.'
   const userId = res.locals.user._id;
   const todolistId = req.params.todolistId;
 
