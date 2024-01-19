@@ -86,6 +86,11 @@ const doc = {
         __v: 0,
       },
     ],
+    UpdateTodolist: {
+      $description: "A example description",
+      $title: "Example title",
+      favorite: true,
+    },
   },
   securityDefinitions: {
     apiKeyAccessToken: {

@@ -109,6 +109,17 @@ export async function updateTodolistHandler(
   req: Request<UpdateTodolistInput["params"]>,
   res: Response
 ) {
+  // #swagger.summary = 'Update a todolist.'
+  // #swagger.description = 'Update a todolist.'
+  /*  #swagger.parameters['body'] = {
+      in: 'body',
+      description: 'Information needed to update a todolist.',
+      schema: { $ref: '#/definitions/UpdateTodolist' }
+  } */
+  /* #swagger.responses[200] = {
+    description: 'successful operation',
+    schema: { $ref: '#/definitions/CreateTodolistResponse' }
+  } */
   const userId = res.locals.user._id;
 
   const todolistId = req.params.todolistId;
