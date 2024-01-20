@@ -91,6 +91,18 @@ const doc = {
       $title: "Example title",
       favorite: true,
     },
+    CreateTodo: {
+      $title: "Example title",
+      $complete: false,
+    },
+    CreateTodoResponse: {
+      title: "Example title",
+      complete: false,
+      _id: "65aae04c5d0d1b2be4e747ce",
+      createdAt: "2024-01-19T20:49:16.131Z",
+      updatedAt: "2024-01-19T20:49:16.131Z",
+      todoId: "todo_bd4891a8-24f4-45f6-8842-e76d6f63bc16",
+    },
   },
   securityDefinitions: {
     apiKeyAccessToken: {

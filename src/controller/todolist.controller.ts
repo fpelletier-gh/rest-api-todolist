@@ -163,6 +163,17 @@ export async function createTodoHandler(
   req: Request<UpdateTodolistInput["params"]>,
   res: Response
 ) {
+  // #swagger.summary = 'Create a todo.'
+  // #swagger.description = 'Create a todo.'
+  /*  #swagger.parameters['body'] = {
+      in: 'body',
+      description: 'Information needed to create a todo.',
+      schema: { $ref: '#/definitions/CreateTodo' }
+  } */
+  /* #swagger.responses[200] = {
+    description: 'successful operation',
+    schema: { $ref: '#/definitions/CreateTodoResponse' }
+  } */
   const userId = res.locals.user._id;
 
   const todolistId = req.params.todolistId;
