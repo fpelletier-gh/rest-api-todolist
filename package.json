@@ -7,6 +7,7 @@
     "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
     "test": "jest --runInBand ./test",
     "build": "tsc",
+    "prod": "npm run build && node ./swagger.js && node ./dist/src/app.js",
     "swagger": "npm run build && node ./swagger.js"
   },
   "author": "Francis Pelletier",
