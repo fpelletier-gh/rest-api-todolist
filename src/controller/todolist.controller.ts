@@ -245,6 +245,8 @@ export async function deleteTodoHandler(
   req: Request<DeleteTodoInput["params"]>,
   res: Response
 ) {
+  // #swagger.summary = 'Delete a todo.'
+  // #swagger.description = 'Delete a todo.'
   const userId = res.locals.user._id;
   const todolistId = req.params.todolistId;
   const todoId = req.params.todoId;
