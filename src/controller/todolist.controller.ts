@@ -213,6 +213,12 @@ export async function getTodoHandler(
   req: Request<GetTodoInput["params"]>,
   res: Response
 ) {
+  // #swagger.summary = 'Get a todo.'
+  // #swagger.description = 'Get a todo.'
+  /* #swagger.responses[200] = {
+    description: 'successful operation',
+    schema: { $ref: '#/definitions/CreateTodoResponse' }
+  } */
   const userId = res.locals.user._id;
   const todolistId = req.params.todolistId;
   const todoId = req.params.todoId;
