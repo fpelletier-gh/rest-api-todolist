@@ -103,6 +103,10 @@ const doc = {
       updatedAt: "2024-01-19T20:49:16.131Z",
       todoId: "todo_bd4891a8-24f4-45f6-8842-e76d6f63bc16",
     },
+    UpdateTodo: {
+      title: "Example title",
+      complete: false,
+    },
   },
   securityDefinitions: {
     apiKeyAccessToken: {

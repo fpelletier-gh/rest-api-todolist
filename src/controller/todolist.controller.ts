@@ -284,6 +284,17 @@ export async function updateTodoHandler(
   req: Request<DeleteTodoInput["params"]>,
   res: Response
 ) {
+  // #swagger.summary = 'Update a todo.'
+  // #swagger.description = 'Update a todo.'
+  /*  #swagger.parameters['body'] = {
+      in: 'body',
+      description: 'Information needed to Update a todo.',
+      schema: { $ref: '#/definitions/UpdateTodo' }
+  } */
+  /* #swagger.responses[200] = {
+    description: 'successful operation',
+    schema: { $ref: '#/definitions/CreateTodoResponse' }
+  } */
   const userId = res.locals.user._id;
   const todolistId = req.params.todolistId;
   const todoId = req.params.todoId;
