@@ -18,6 +18,17 @@ export async function createNoteHandler(
   req: Request<{}, {}, CreateNoteInput["body"]>,
   res: Response
 ) {
+  // #swagger.summary = 'Create a new note.'
+  // #swagger.description = 'Create a new note.'
+  /*  #swagger.parameters['body'] = {
+      in: 'body',
+      description: 'Information needed to create a note.',
+      schema: { $ref: '#/definitions/CreateNote' }
+  } */
+  /* #swagger.responses[200] = {
+    description: 'successful operation',
+    schema: { $ref: '#/definitions/CreateNoteResponse' }
+  } */
   const userId = res.locals.user._id;
 
   const body = req.body;

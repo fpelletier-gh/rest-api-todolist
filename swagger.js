@@ -107,6 +107,22 @@ const doc = {
       title: "Example title",
       complete: false,
     },
+    CreateNote: {
+      $title: "Note",
+      $content: "A simple note",
+    },
+    CreateNoteResponse: {
+      user: "65a5d78c08419455e17c0139",
+      title: "Note",
+      content: "A simple note",
+      valid: true,
+      favorite: false,
+      _id: "65aecf2eaf45583f674fe5f1",
+      noteId: "note_bb876e7c-1ea7-4265-a22a-4426076f56fa",
+      createdAt: "2024-01-22T20:25:18.294Z",
+      updatedAt: "2024-01-22T20:25:18.294Z",
+      __v: 0,
+    },
   },
   securityDefinitions: {
     apiKeyAccessToken: {
