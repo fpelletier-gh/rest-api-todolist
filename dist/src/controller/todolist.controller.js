@@ -19,7 +19,7 @@ const logger_1 = __importDefault(require("../utils/logger"));
 function createTodolistHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         // #swagger.summary = 'Create a new todolist.'
-        // #swagger.summary = 'Create a new todolist.'
+        // #swagger.description = 'Create a new todolist.'
         /*  #swagger.parameters['body'] = {
             in: 'body',
             description: 'Information needed to create a session.',
@@ -39,7 +39,7 @@ exports.createTodolistHandler = createTodolistHandler;
 function getAllTodolistHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         // #swagger.summary = 'Get all todolists.'
-        // #swagger.summary = 'Get all todolists.'
+        // #swagger.description = 'Get all todolists.'
         /* #swagger.responses[200] = {
           description: 'successful operation',
           schema: { $ref: '#/definitions/GetAllTodolistResponse' }
@@ -55,6 +55,12 @@ function getAllTodolistHandler(req, res) {
 exports.getAllTodolistHandler = getAllTodolistHandler;
 function getTodolistHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        // #swagger.summary = 'Get a todolist.'
+        // #swagger.description = 'Get a todolist.'
+        /* #swagger.responses[200] = {
+          description: 'successful operation',
+          schema: { $ref: '#/definitions/CreateTodolistResponse' }
+        } */
         const todolistId = req.params.todolistId;
         const todolist = yield (0, todolist_service_1.findTodolist)({ todolistId });
         if (!todolist) {
@@ -66,6 +72,8 @@ function getTodolistHandler(req, res) {
 exports.getTodolistHandler = getTodolistHandler;
 function deleteTodolistHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        // #swagger.summary = 'Delete a todolist.'
+        // #swagger.description = 'Delete a todolist.'
         const userId = res.locals.user._id;
         const todolistId = req.params.todolistId;
         const todolist = yield (0, todolist_service_1.findTodolist)({ todolistId: todolistId });
@@ -88,6 +96,17 @@ function deleteTodolistHandler(req, res) {
 exports.deleteTodolistHandler = deleteTodolistHandler;
 function updateTodolistHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        // #swagger.summary = 'Update a todolist.'
+        // #swagger.description = 'Update a todolist.'
+        /*  #swagger.parameters['body'] = {
+            in: 'body',
+            description: 'Information needed to update a todolist.',
+            schema: { $ref: '#/definitions/UpdateTodolist' }
+        } */
+        /* #swagger.responses[200] = {
+          description: 'successful operation',
+          schema: { $ref: '#/definitions/CreateTodolistResponse' }
+        } */
         const userId = res.locals.user._id;
         const todolistId = req.params.todolistId;
         const update = req.body;
@@ -113,6 +132,17 @@ function updateTodolistHandler(req, res) {
 exports.updateTodolistHandler = updateTodolistHandler;
 function createTodoHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        // #swagger.summary = 'Create a todo.'
+        // #swagger.description = 'Create a todo.'
+        /*  #swagger.parameters['body'] = {
+            in: 'body',
+            description: 'Information needed to create a todo.',
+            schema: { $ref: '#/definitions/CreateTodo' }
+        } */
+        /* #swagger.responses[200] = {
+          description: 'successful operation',
+          schema: { $ref: '#/definitions/CreateTodoResponse' }
+        } */
         const userId = res.locals.user._id;
         const todolistId = req.params.todolistId;
         const update = req.body;
@@ -142,6 +172,12 @@ function createTodoHandler(req, res) {
 exports.createTodoHandler = createTodoHandler;
 function getTodoHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        // #swagger.summary = 'Get a todo.'
+        // #swagger.description = 'Get a todo.'
+        /* #swagger.responses[200] = {
+          description: 'successful operation',
+          schema: { $ref: '#/definitions/CreateTodoResponse' }
+        } */
         const userId = res.locals.user._id;
         const todolistId = req.params.todolistId;
         const todoId = req.params.todoId;
@@ -162,6 +198,8 @@ function getTodoHandler(req, res) {
 exports.getTodoHandler = getTodoHandler;
 function deleteTodoHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        // #swagger.summary = 'Delete a todo.'
+        // #swagger.description = 'Delete a todo.'
         const userId = res.locals.user._id;
         const todolistId = req.params.todolistId;
         const todoId = req.params.todoId;
@@ -189,6 +227,17 @@ function deleteTodoHandler(req, res) {
 exports.deleteTodoHandler = deleteTodoHandler;
 function updateTodoHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        // #swagger.summary = 'Update a todo.'
+        // #swagger.description = 'Update a todo.'
+        /*  #swagger.parameters['body'] = {
+            in: 'body',
+            description: 'Information needed to Update a todo.',
+            schema: { $ref: '#/definitions/UpdateTodo' }
+        } */
+        /* #swagger.responses[200] = {
+          description: 'successful operation',
+          schema: { $ref: '#/definitions/CreateTodoResponse' }
+        } */
         const userId = res.locals.user._id;
         const todolistId = req.params.todolistId;
         const todoId = req.params.todoId;

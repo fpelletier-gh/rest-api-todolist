@@ -133,13 +133,5 @@ function routes(app) {
       { "apiKeyRefreshTokenCookie": [] }
     ] */
     );
-    app.post("/api/note/:noteId", [requireUser_1.default, (0, validateResource_1.default)(todolist_schema_1.createTodoSchema)], todolist_controller_1.createTodoHandler
-    /* #swagger.security = [
-      { "apiKeyAccessToken": [] },
-      { "apiKeyRefreshToken": [] },
-      { "apiKeyAccessTokenCookie": [] },
-      { "apiKeyRefreshTokenCookie": [] }
-    ] */
-    );
 }
 exports.default = routes;

@@ -17,6 +17,17 @@ const note_service_1 = require("../service/note.service");
 const logger_1 = __importDefault(require("../utils/logger"));
 function createNoteHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        // #swagger.summary = 'Create a new note.'
+        // #swagger.description = 'Create a new note.'
+        /*  #swagger.parameters['body'] = {
+            in: 'body',
+            description: 'Information needed to create a note.',
+            schema: { $ref: '#/definitions/CreateNote' }
+        } */
+        /* #swagger.responses[200] = {
+          description: 'successful operation',
+          schema: { $ref: '#/definitions/CreateNoteResponse' }
+        } */
         const userId = res.locals.user._id;
         const body = req.body;
         const note = yield (0, note_service_1.createNote)(Object.assign(Object.assign({}, body), { user: userId }));
@@ -26,6 +37,12 @@ function createNoteHandler(req, res) {
 exports.createNoteHandler = createNoteHandler;
 function getAllNoteHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        // #swagger.summary = 'Get all notes.'
+        // #swagger.description = 'Get all notes.'
+        /* #swagger.responses[200] = {
+          description: 'successful operation',
+          schema: { $ref: '#/definitions/GetAllNoteResponse' }
+        } */
         const userId = res.locals.user._id;
         if (!userId) {
             return res.status(403).send("Unauthorized");
@@ -37,6 +54,12 @@ function getAllNoteHandler(req, res) {
 exports.getAllNoteHandler = getAllNoteHandler;
 function getNoteHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        // #swagger.summary = 'Get a note.'
+        // #swagger.description = 'Get a note.'
+        /* #swagger.responses[200] = {
+          description: 'successful operation',
+          schema: { $ref: '#/definitions/CreateNoteResponse' }
+        } */
         const noteId = req.params.noteId;
         const note = yield (0, note_service_1.findNote)({ noteId });
         if (!note) {
@@ -48,6 +71,8 @@ function getNoteHandler(req, res) {
 exports.getNoteHandler = getNoteHandler;
 function deleteNoteHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        // #swagger.summary = 'Delete a note.'
+        // #swagger.description = 'Delete a note.'
         const userId = res.locals.user._id;
         const noteId = req.params.noteId;
         const note = yield (0, note_service_1.findNote)({ noteId: noteId });
@@ -70,6 +95,17 @@ function deleteNoteHandler(req, res) {
 exports.deleteNoteHandler = deleteNoteHandler;
 function updateNoteHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        // #swagger.summary = 'Update a note.'
+        // #swagger.description = 'Update a note.'
+        /*  #swagger.parameters['body'] = {
+            in: 'body',
+            description: 'Information needed to update a note.',
+            schema: { $ref: '#/definitions/UpdateNote' }
+        } */
+        /* #swagger.responses[200] = {
+          description: 'successful operation',
+          schema: { $ref: '#/definitions/CreateNoteResponse' }
+        } */
         const userId = res.locals.user._id;
         const noteId = req.params.noteId;
         const update = req.body;

@@ -213,7 +213,7 @@
     "/api/todolist": {
       "post": {
         "summary": "Create a new todolist.",
-        "description": "",
+        "description": "Create a new todolist.",
         "parameters": [
           {
             "name": "body",
@@ -249,7 +249,7 @@
       },
       "get": {
         "summary": "Get all todolists.",
-        "description": "",
+        "description": "Get all todolists.",
         "parameters": [],
         "responses": {
           "200": {
@@ -280,18 +280,30 @@
     },
     "/api/todolist/{todolistId}": {
       "put": {
-        "description": "",
+        "summary": "Update a todolist.",
+        "description": "Update a todolist.",
         "parameters": [
           {
             "name": "todolistId",
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Information needed to update a todolist.",
+            "schema": {
+              "$ref": "#/definitions/UpdateTodolist"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/CreateTodolistResponse"
+            }
           },
           "403": {
             "description": "Forbidden"
@@ -319,7 +331,8 @@
         ]
       },
       "get": {
-        "description": "",
+        "summary": "Get a todolist.",
+        "description": "Get a todolist.",
         "parameters": [
           {
             "name": "todolistId",
@@ -330,7 +343,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/CreateTodolistResponse"
+            }
           },
           "404": {
             "description": "Not Found"
@@ -352,7 +368,8 @@
         ]
       },
       "delete": {
-        "description": "",
+        "summary": "Delete a todolist.",
+        "description": "Delete a todolist.",
         "parameters": [
           {
             "name": "todolistId",
@@ -391,18 +408,30 @@
         ]
       },
       "post": {
-        "description": "",
+        "summary": "Create a todo.",
+        "description": "Create a todo.",
         "parameters": [
           {
             "name": "todolistId",
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Information needed to create a todo.",
+            "schema": {
+              "$ref": "#/definitions/CreateTodo"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/CreateTodoResponse"
+            }
           },
           "403": {
             "description": "Forbidden"
@@ -432,7 +461,8 @@
     },
     "/api/todolist/{todolistId}/{todoId}": {
       "get": {
-        "description": "",
+        "summary": "Get a todo.",
+        "description": "Get a todo.",
         "parameters": [
           {
             "name": "todolistId",
@@ -449,7 +479,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/CreateTodoResponse"
+            }
           },
           "403": {
             "description": "Forbidden"
@@ -474,7 +507,8 @@
         ]
       },
       "delete": {
-        "description": "",
+        "summary": "Delete a todo.",
+        "description": "Delete a todo.",
         "parameters": [
           {
             "name": "todolistId",
@@ -519,7 +553,8 @@
         ]
       },
       "put": {
-        "description": "",
+        "summary": "Update a todo.",
+        "description": "Update a todo.",
         "parameters": [
           {
             "name": "todolistId",
@@ -532,11 +567,22 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Information needed to Update a todo.",
+            "schema": {
+              "$ref": "#/definitions/UpdateTodo"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/CreateTodoResponse"
+            }
           },
           "403": {
             "description": "Forbidden"
@@ -566,11 +612,24 @@
     },
     "/api/note": {
       "post": {
-        "description": "",
-        "parameters": [],
+        "summary": "Create a new note.",
+        "description": "Create a new note.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Information needed to create a note.",
+            "schema": {
+              "$ref": "#/definitions/CreateNote"
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/CreateNoteResponse"
+            }
           }
         },
         "security": [
@@ -589,11 +648,15 @@
         ]
       },
       "get": {
-        "description": "",
+        "summary": "Get all notes.",
+        "description": "Get all notes.",
         "parameters": [],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/GetAllNoteResponse"
+            }
           },
           "403": {
             "description": "Forbidden"
@@ -617,18 +680,30 @@
     },
     "/api/note/{noteId}": {
       "put": {
-        "description": "",
+        "summary": "Update a note.",
+        "description": "Update a note.",
         "parameters": [
           {
             "name": "noteId",
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Information needed to update a note.",
+            "schema": {
+              "$ref": "#/definitions/UpdateNote"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/CreateNoteResponse"
+            }
           },
           "403": {
             "description": "Forbidden"
@@ -656,7 +731,8 @@
         ]
       },
       "get": {
-        "description": "",
+        "summary": "Get a note.",
+        "description": "Get a note.",
         "parameters": [
           {
             "name": "noteId",
@@ -667,7 +743,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/CreateNoteResponse"
+            }
           },
           "404": {
             "description": "Not Found"
@@ -689,46 +768,8 @@
         ]
       },
       "delete": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "noteId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "409": {
-            "description": "Conflict"
-          }
-        },
-        "security": [
-          {
-            "apiKeyAccessToken": []
-          },
-          {
-            "apiKeyRefreshToken": []
-          },
-          {
-            "apiKeyAccessTokenCookie": []
-          },
-          {
-            "apiKeyRefreshTokenCookie": []
-          }
-        ]
-      },
-      "post": {
-        "description": "",
+        "summary": "Delete a note.",
+        "description": "Delete a note.",
         "parameters": [
           {
             "name": "noteId",
@@ -1031,6 +1072,209 @@
             "type": "number",
             "example": 0
           }
+        }
+      }
+    },
+    "UpdateTodolist": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "example": "A example description"
+        },
+        "title": {
+          "type": "string",
+          "example": "Example title"
+        },
+        "favorite": {
+          "type": "boolean",
+          "example": true
+        }
+      },
+      "required": [
+        "description",
+        "title"
+      ]
+    },
+    "CreateTodo": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "Example title"
+        },
+        "complete": {
+          "type": "boolean",
+          "example": false
+        }
+      },
+      "required": [
+        "title",
+        "complete"
+      ]
+    },
+    "CreateTodoResponse": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "Example title"
+        },
+        "complete": {
+          "type": "boolean",
+          "example": false
+        },
+        "_id": {
+          "type": "string",
+          "example": "65aae04c5d0d1b2be4e747ce"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "2024-01-19T20:49:16.131Z"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "2024-01-19T20:49:16.131Z"
+        },
+        "todoId": {
+          "type": "string",
+          "example": "todo_bd4891a8-24f4-45f6-8842-e76d6f63bc16"
+        }
+      }
+    },
+    "UpdateTodo": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "Example title"
+        },
+        "complete": {
+          "type": "boolean",
+          "example": false
+        }
+      }
+    },
+    "CreateNote": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "Note"
+        },
+        "content": {
+          "type": "string",
+          "example": "A simple note"
+        }
+      },
+      "required": [
+        "title",
+        "content"
+      ]
+    },
+    "CreateNoteResponse": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "type": "string",
+          "example": "65a5d78c08419455e17c0139"
+        },
+        "title": {
+          "type": "string",
+          "example": "Note"
+        },
+        "content": {
+          "type": "string",
+          "example": "A simple note"
+        },
+        "valid": {
+          "type": "boolean",
+          "example": true
+        },
+        "favorite": {
+          "type": "boolean",
+          "example": false
+        },
+        "_id": {
+          "type": "string",
+          "example": "65aecf2eaf45583f674fe5f1"
+        },
+        "noteId": {
+          "type": "string",
+          "example": "note_bb876e7c-1ea7-4265-a22a-4426076f56fa"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "2024-01-22T20:25:18.294Z"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "2024-01-22T20:25:18.294Z"
+        },
+        "__v": {
+          "type": "number",
+          "example": 0
+        }
+      }
+    },
+    "GetAllNoteResponse": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "string",
+            "example": "65a5d78c08419455e17c0139"
+          },
+          "title": {
+            "type": "string",
+            "example": "Note"
+          },
+          "content": {
+            "type": "string",
+            "example": "A simple note"
+          },
+          "valid": {
+            "type": "boolean",
+            "example": true
+          },
+          "favorite": {
+            "type": "boolean",
+            "example": false
+          },
+          "_id": {
+            "type": "string",
+            "example": "65aecf2eaf45583f674fe5f1"
+          },
+          "noteId": {
+            "type": "string",
+            "example": "note_bb876e7c-1ea7-4265-a22a-4426076f56fa"
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2024-01-22T20:25:18.294Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "example": "2024-01-22T20:25:18.294Z"
+          },
+          "__v": {
+            "type": "number",
+            "example": 0
+          }
+        }
+      }
+    },
+    "UpdateNote": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "Note"
+        },
+        "content": {
+          "type": "string",
+          "example": "A simple note"
         }
       }
     }
