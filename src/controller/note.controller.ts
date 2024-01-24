@@ -62,6 +62,12 @@ export async function getNoteHandler(
   req: Request<GetNoteInput["params"]>,
   res: Response
 ) {
+  // #swagger.summary = 'Get a note.'
+  // #swagger.description = 'Get a note.'
+  /* #swagger.responses[200] = {
+    description: 'successful operation',
+    schema: { $ref: '#/definitions/CreateNoteResponse' }
+  } */
   const noteId = req.params.noteId;
   const note = await findNote({ noteId });
 
