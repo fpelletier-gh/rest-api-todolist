@@ -39,6 +39,12 @@ export async function createNoteHandler(
 }
 
 export async function getAllNoteHandler(req: Request, res: Response) {
+  // #swagger.summary = 'Get all notes.'
+  // #swagger.description = 'Get all notes.'
+  /* #swagger.responses[200] = {
+    description: 'successful operation',
+    schema: { $ref: '#/definitions/GetAllNoteResponse' }
+  } */
   const userId = res.locals.user._id;
 
   if (!userId) {
