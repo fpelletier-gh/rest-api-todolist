@@ -137,6 +137,10 @@ const doc = {
         __v: 0,
       },
     ],
+    UpdateNote: {
+      title: "Note",
+      content: "A simple note",
+    },
   },
   securityDefinitions: {
     apiKeyAccessToken: {

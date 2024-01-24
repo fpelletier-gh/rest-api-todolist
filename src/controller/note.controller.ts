@@ -111,6 +111,17 @@ export async function updateNoteHandler(
   req: Request<UpdateNoteInput["params"]>,
   res: Response
 ) {
+  // #swagger.summary = 'Update a note.'
+  // #swagger.description = 'Update a note.'
+  /*  #swagger.parameters['body'] = {
+      in: 'body',
+      description: 'Information needed to update a note.',
+      schema: { $ref: '#/definitions/UpdateNote' }
+  } */
+  /* #swagger.responses[200] = {
+    description: 'successful operation',
+    schema: { $ref: '#/definitions/CreateNoteResponse' }
+  } */
   const userId = res.locals.user._id;
 
   const noteId = req.params.noteId;
