@@ -25,7 +25,7 @@ export async function createTodolistHandler(
   res: Response
 ) {
   // #swagger.summary = 'Create a new todolist.'
-  // #swagger.summary = 'Create a new todolist.'
+  // #swagger.description = 'Create a new todolist.'
   /*  #swagger.parameters['body'] = {
       in: 'body',
       description: 'Information needed to create a session.',
