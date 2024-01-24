@@ -227,18 +227,6 @@ function routes(app: Express) {
       { "apiKeyRefreshTokenCookie": [] }
     ] */
   );
-
-  app.post(
-    "/api/note/:noteId",
-    [requireUser, validateResource(createTodoSchema)],
-    createTodoHandler
-    /* #swagger.security = [
-      { "apiKeyAccessToken": [] },
-      { "apiKeyRefreshToken": [] },
-      { "apiKeyAccessTokenCookie": [] },
-      { "apiKeyRefreshTokenCookie": [] }
-    ] */
-  );
 }
 
 export default routes;
