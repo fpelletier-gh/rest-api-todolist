@@ -46,7 +46,7 @@ export async function createTodolistHandler(
 
 export async function getAllTodolistHandler(req: Request, res: Response) {
   // #swagger.summary = 'Get all todolists.'
-  // #swagger.summary = 'Get all todolists.'
+  // #swagger.description = 'Get all todolists.'
   /* #swagger.responses[200] = {
     description: 'successful operation',
     schema: { $ref: '#/definitions/GetAllTodolistResponse' }
