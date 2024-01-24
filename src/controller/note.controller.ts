@@ -82,6 +82,8 @@ export async function deleteNoteHandler(
   req: Request<DeleteNoteInput["params"]>,
   res: Response
 ) {
+  // #swagger.summary = 'Delete a note.'
+  // #swagger.description = 'Delete a note.'
   const userId = res.locals.user._id;
   const noteId = req.params.noteId;
 
